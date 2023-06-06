@@ -10,20 +10,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table
-public class Course {
+public class Desserts extends Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private Boolean containFrozenIngredients;
 
     @Column(nullable = false)
-    private Double price;
+    private Boolean glutenFree;
 
     @Column(nullable = false)
-    private String description;
+    private Boolean lactoseFree;
 
-    //progetto vecchio PortateEnum type, come lo scrivo con springboot?
+    //progetto vecchio SapiditaEnum dolcezza, come lo scrivo con springboot?
 
 }
