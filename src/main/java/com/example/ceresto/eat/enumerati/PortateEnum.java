@@ -1,7 +1,5 @@
 package com.example.ceresto.eat.enumerati;
 
-import static pietanze.enumerati.AnsiUtilityEnum.*;
-
 public enum PortateEnum {
     
     BEVERAGES(1, "------- BEVANDE -------"),
@@ -19,7 +17,7 @@ public enum PortateEnum {
     }
 
     public String getNome() {
-        return ANSI_BLACK_CHARS.getCodice() + ANSI_RED_BACKGROUND.getCodice() + nome + ANSI_RESET.getCodice();
+        return nome;
     }
 
     public Integer getKey() {
