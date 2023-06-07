@@ -15,12 +15,12 @@ public class DessertsController {
     private DessertsRepository dessertsRepository;
 
     @PostMapping("/create")
-    public void createDessert(@RequestBody Desserts dessert) {
+    public void create(@RequestBody Desserts dessert) {
         dessertsRepository.saveAndFlush(dessert);
     }
 
     @GetMapping("/getAll")
-    public List<Desserts> getAllDesserts() {
+    public List<Desserts> getAll() {
         return dessertsRepository.findAll();
     }
 
@@ -30,7 +30,7 @@ public class DessertsController {
     }
 
     @PutMapping("/update/{id}")
-    public String modifyHall(@PathVariable Long id, @RequestBody Desserts desserts){
+    public String update(@PathVariable Long id, @RequestBody Desserts desserts){
         dessertsRepository.deleteById(id);
         dessertsRepository.save(desserts);
         return "Dessert updated";
