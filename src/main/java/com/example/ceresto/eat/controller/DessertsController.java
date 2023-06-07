@@ -1,7 +1,10 @@
 package com.example.ceresto.eat.controller;
 
+import com.example.ceresto.eat.enumerati.RecordStatus;
 import com.example.ceresto.eat.model.Desserts;
 import com.example.ceresto.eat.repository.DessertsRepository;
+import com.example.ceresto.eat.service.DessertsService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +16,8 @@ import java.util.Optional;
 public class DessertsController {
     @Autowired
     private DessertsRepository dessertsRepository;
+    @Autowired
+    private DessertsService dessertsService;
 
     @PostMapping("/create")
     public void create(@RequestBody Desserts dessert) {
@@ -30,7 +35,7 @@ public class DessertsController {
     }
 
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id, @RequestBody Desserts desserts){
+    public String update(@PathVariable Long id, @RequestBody Desserts desserts) {
         dessertsRepository.deleteById(id);
         dessertsRepository.save(desserts);
         return "Dessert updated";
@@ -46,5 +51,9 @@ public class DessertsController {
         dessertsRepository.deleteAll();
     }
 
-
+//    @PutMapping("/update/status/{id}")
+//    public String updateRecordStatus(@PathVariable Long id, @RequestBody Desserts desserts) {
+//        dessertsService.updateRecordStatus(id, desserts);
+//        return "Desserts Status Updated";
+//    }
 }
