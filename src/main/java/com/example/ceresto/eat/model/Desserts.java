@@ -1,9 +1,13 @@
 package com.example.ceresto.eat.model;
 
+import com.example.ceresto.eat.enumerati.IngredientiEnum;
+import com.example.ceresto.eat.enumerati.SapiditaEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,6 +27,12 @@ public class Desserts extends Course {
 
     @Column(nullable = false)
     private Boolean lactoseFree;
+
+    @Column(nullable = false)
+    private SapiditaEnum dolcezza;
+
+    @Column(nullable = true)
+    private List<IngredientiEnum> ingredientiEnumList;
 
     //progetto vecchio SapiditaEnum dolcezza, come lo scrivo con springboot?
 

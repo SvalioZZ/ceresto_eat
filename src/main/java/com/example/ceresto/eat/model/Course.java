@@ -1,5 +1,6 @@
 package com.example.ceresto.eat.model;
 
+import com.example.ceresto.eat.enumerati.PortateEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,9 @@ public class Course {
 
     @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
+    private PortateEnum type;
 
     //progetto vecchio PortateEnum type, come lo scrivo con springboot?
 
