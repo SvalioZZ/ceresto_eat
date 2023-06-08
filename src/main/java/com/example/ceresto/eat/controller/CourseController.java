@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/api/course")
 public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
@@ -20,7 +20,7 @@ public class CourseController {
     }
 
     @GetMapping("/getAll")
-    public List<Course> getAllDesserts() {
+    public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
