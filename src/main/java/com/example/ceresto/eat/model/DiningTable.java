@@ -1,16 +1,12 @@
 package com.example.ceresto.eat.model;
 
+import com.example.ceresto.eat.enumerati.RecordStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
 @Table
-public class DiningTable {
+public class DiningTable extends Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tableId;
@@ -20,4 +16,38 @@ public class DiningTable {
 
     @Column(nullable = false)
     private String description;
+
+    public DiningTable(Integer tableId, Integer tableAvailability, String description) {
+        super(RecordStatus.ACTIVE);
+        this.tableId = tableId;
+        this.tableAvailability = tableAvailability;
+        this.description = description;
+    }
+
+    public DiningTable() {
+    }
+
+    public Integer getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(Integer tableId) {
+        this.tableId = tableId;
+    }
+
+    public Integer getTableAvailability() {
+        return tableAvailability;
+    }
+
+    public void setTableAvailability(Integer tableAvailability) {
+        this.tableAvailability = tableAvailability;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

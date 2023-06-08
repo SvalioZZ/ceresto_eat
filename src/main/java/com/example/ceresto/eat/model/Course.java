@@ -1,17 +1,11 @@
 package com.example.ceresto.eat.model;
 
-import com.example.ceresto.eat.enumerati.PortateEnum;
+import com.example.ceresto.eat.enumerati.RecordStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table
-public class Course {
+public class Course extends Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,9 +19,46 @@ public class Course {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
-    private PortateEnum type;
+    public Course(RecordStatus status, Long id, String name, Double price, String description) {
+        super(RecordStatus.ACTIVE);
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
 
-    //progetto vecchio PortateEnum type, come lo scrivo con springboot?
+    public Course() {
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

@@ -1,19 +1,15 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.IngredientiEnum;
-import com.example.ceresto.eat.enumerati.PortateEnum;
 import com.example.ceresto.eat.enumerati.RecordStatus;
 import com.example.ceresto.eat.enumerati.SapiditaEnum;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table
-public class Desserts {
+public class Desserts extends Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,40 +19,33 @@ public class Desserts {
     private Double price;
     @Column(nullable = false)
     private String description;
-    @Column
-    private PortateEnum type;
-    @Column
+    @Column(nullable = false)
     private Boolean containFrozenIngredients;
-    @Column
+    @Column(nullable = false)
     private Boolean glutenFree;
-    @Column
+    @Column(nullable = false)
     private Boolean lactoseFree;
-    @Column
+    @Column(nullable = false)
     private SapiditaEnum sugarLevel;
     //progetto vecchio SapiditaEnum dolcezza, come lo scrivo con springboot?
-
     @Column
     private List<IngredientiEnum> ingredientiEnumList;
-    @Column
-    private RecordStatus status;
 
-    public Desserts() {
-    }
 
-    public Desserts(Long id, String name, Double price, String description, PortateEnum type, Boolean containFrozenIngredients,
-                    Boolean glutenFree, Boolean lactoseFree, SapiditaEnum sugarLevel, List<IngredientiEnum> ingredientiEnumList,
-                    RecordStatus status) {
+    public Desserts(Long id, String name, Double price, String description, Boolean containFrozenIngredients, Boolean glutenFree, Boolean lactoseFree, SapiditaEnum sugarLevel, List<IngredientiEnum> ingredientiEnumList) {
+        super(RecordStatus.ACTIVE);
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.type = type;
         this.containFrozenIngredients = containFrozenIngredients;
         this.glutenFree = glutenFree;
         this.lactoseFree = lactoseFree;
         this.sugarLevel = sugarLevel;
         this.ingredientiEnumList = ingredientiEnumList;
-        this.status = status;
+    }
+
+    public Desserts() {
     }
 
     public Long getId() {
@@ -129,14 +118,6 @@ public class Desserts {
 
     public void setIngredientiEnumList(List<IngredientiEnum> ingredientiEnumList) {
         this.ingredientiEnumList = ingredientiEnumList;
-    }
-
-    public RecordStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(RecordStatus status) {
-        this.status = status;
     }
 
 }
