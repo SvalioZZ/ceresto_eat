@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class DiningTable extends Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer tableId;
+    private Long tableId;
 
     @Column(nullable = false)
     private Integer tableAvailability;
@@ -17,7 +17,7 @@ public class DiningTable extends Record {
     @Column(nullable = false)
     private String description;
 
-    public DiningTable(Integer tableId, Integer tableAvailability, String description) {
+    public DiningTable(Long tableId, Integer tableAvailability, String description) {
         super(RecordStatus.ACTIVE);
         this.tableId = tableId;
         this.tableAvailability = tableAvailability;
@@ -27,11 +27,11 @@ public class DiningTable extends Record {
     public DiningTable() {
     }
 
-    public Integer getTableId() {
+    public Long getTableId() {
         return tableId;
     }
 
-    public void setTableId(Integer tableId) {
+    public void setTableId(Long tableId) {
         this.tableId = tableId;
     }
 
