@@ -3,6 +3,8 @@ package com.example.ceresto.eat.model;
 import com.example.ceresto.eat.enumerati.RecordStatus;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table
 public class Course extends Record {
@@ -18,6 +20,11 @@ public class Course extends Record {
 
     @Column(nullable = false)
     private String description;
+    
+    
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Ingredient> ingredients;
+    
 
     public Course(RecordStatus status, Long id, String name, Double price, String description) {
         super(RecordStatus.ACTIVE);
@@ -53,7 +60,15 @@ public class Course extends Record {
     public void setPrice(Double price) {
         this.price = price;
     }
-
+    
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+    
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+    
     public String getDescription() {
         return description;
     }
@@ -61,4 +76,5 @@ public class Course extends Record {
     public void setDescription(String description) {
         this.description = description;
     }
+    
 }

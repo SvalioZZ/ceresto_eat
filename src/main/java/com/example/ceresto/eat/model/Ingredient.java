@@ -1,11 +1,12 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.RecordStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Beverage extends Record{
+public class Ingredient extends Record{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,22 +16,28 @@ public class Beverage extends Record{
     private String name;
     
     @Column(nullable = false)
-    private Double price;
-    
-    @Column(nullable = false)
     private String description;
     
-    public Beverage(RecordStatus status, Long id, String name, Double price, String description) {
-        super(RecordStatus.ACTIVE);
+    @Column(nullable = false)
+    private Double price;
+    
+    @JsonBackReference
+    @ManyToOne
+    private Course course;
+    
+    public Ingredient(RecordStatus status, Long id, String name, String description, Double price, Course course) {
+        super(status);
         this.id = id;
         this.name = name;
-        this.price = price;
         this.description = description;
+        this.price = price;
+        this.course = course;
     }
     
-    public Beverage (){
+    public Ingredient() {
     
     }
+    
     public Long getId() {
         return id;
     }
@@ -47,14 +54,6 @@ public class Beverage extends Record{
         this.name = name;
     }
     
-    public Double getPrice() {
-        return price;
-    }
-    
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-    
     public String getDescription() {
         return description;
     }
@@ -63,4 +62,19 @@ public class Beverage extends Record{
         this.description = description;
     }
     
+    public Double getPrice() {
+        return price;
+    }
+    
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+    
+    public Course getCourse() {
+        return course;
+    }
+    
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }
