@@ -1,14 +1,19 @@
 package com.example.ceresto.eat.enumerati;
 
 public enum SapiditaEnum {
-    AMARISSIMO(1, "Amarissimo"), AMARO(2, "Amaro"), DOLCE(3, "Dolce"),
-    DOLCISSIMO(4, "Dolcissimo"), SALATO(5, "Salato"), SALATISSIMO(6, "Salatissimo"),
-    SCIAPO(7, "Senza Sale"), AGRODOLCE(8, "Agrodolce");
+    AMARISSIMO(1L, "Amarissimo"),
+    AMARO(2L, "Amaro"),
+    DOLCE(3L, "Dolce"),
+    DOLCISSIMO(4L, "Dolcissimo"),
+    SALATO(5L, "Salato"),
+    SALATISSIMO(6L, "Salatissimo"),
+    SCIAPO(7L, "Senza Sale"),
+    AGRODOLCE(8L, "Agrodolce");
 
-    private Integer id;
+    private Long id;
     private String descrizione;
 
-    SapiditaEnum(Integer id, String descrizione) {
+    SapiditaEnum(Long id, String descrizione) {
         this.id = id;
         this.descrizione = descrizione;
     }
@@ -21,11 +26,11 @@ public enum SapiditaEnum {
         this.descrizione = name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

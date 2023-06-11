@@ -25,19 +25,19 @@ public class DiningTableController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<DiningTable> getById(@PathVariable Integer id) {
+    public Optional<DiningTable> getById(@PathVariable Long id) {
         return diningTableRepository.findById(id);
     }
 
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Integer id, @RequestBody DiningTable table){
+    public String update(@PathVariable Long id, @RequestBody DiningTable table){
         diningTableRepository.deleteById(id);
         diningTableRepository.save(table);
         return "Table updated";
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteById(@PathVariable Integer id) {
+    public void deleteById(@PathVariable Long id) {
         diningTableRepository.deleteById(id);
     }
 

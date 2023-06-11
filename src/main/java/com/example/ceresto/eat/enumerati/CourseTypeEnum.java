@@ -10,7 +10,7 @@ public enum CourseTypeEnum {
     SECOND(4L),
     DESSERT(5L);
     
-    @Id
+    
     private final Long id_courseType;
     
     CourseTypeEnum(Long id_courseType) {

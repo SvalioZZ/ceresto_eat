@@ -77,4 +77,8 @@ public class Course extends Record {
         this.description = description;
     }
     
+    public String getInfo() {
+       return id + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
+    }
+    
 }

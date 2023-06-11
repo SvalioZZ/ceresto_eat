@@ -3,6 +3,8 @@ package com.example.ceresto.eat.controller;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,29 +21,34 @@ public class CourseController {
         courseRepository.saveAndFlush(course);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
+    
+    @GetMapping("/get-by-name/{name}")
+    public List<Course> getByName(@PathVariable("name") String name) {
+        return courseRepository.getFromName(name);
+    }
 
-    @GetMapping("/get/{id}")
-    public Optional<Course> getById(@PathVariable Long id) {
+    @GetMapping("/get-by-id/{id}")
+    public Optional<Course> getById(@PathVariable("id") Long id) {
         return courseRepository.findById(id);
     }
 
     @PutMapping("/update/{id}")
-    public String modifyHall(@PathVariable Long id, @RequestBody Course course){
+    public ResponseEntity<String> modifyById(@PathVariable Long id, @RequestBody Course course){
         courseRepository.deleteById(id);
         courseRepository.save(course);
-        return "Course updated";
+        return new ResponseEntity<>("Course with id " + id + ":\n" + course.getInfo(), HttpStatusCode.valueOf(200));
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id) {
         courseRepository.deleteById(id);
     }
 
-    @DeleteMapping("deleteAll")
+    @DeleteMapping("/delete-all")
     public void deleteAll() {
         courseRepository.deleteAll();
     }
