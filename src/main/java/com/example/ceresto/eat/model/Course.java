@@ -10,7 +10,7 @@ import java.util.List;
 public class Course extends Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long courseId;
 
     @Column(nullable = false)
     private String name;
@@ -26,9 +26,9 @@ public class Course extends Record {
     private List<Ingredient> ingredients;
     
 
-    public Course(RecordStatus status, Long id, String name, Double price, String description) {
+    public Course(RecordStatus status, Long courseId, String name, Double price, String description) {
         super(RecordStatus.ACTIVE);
-        this.id = id;
+        this.courseId = courseId;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -37,12 +37,12 @@ public class Course extends Record {
     public Course() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getCourseId() {
+        return courseId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
     }
 
     public String getName() {
@@ -78,7 +78,7 @@ public class Course extends Record {
     }
     
     public String getInfo() {
-       return id + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
+       return courseId + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
     }
-    
+
 }

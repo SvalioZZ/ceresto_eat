@@ -10,7 +10,7 @@ public class Ingredient extends Record{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long ingredientId;
     
     @Column(nullable = false)
     private String name;
@@ -25,9 +25,9 @@ public class Ingredient extends Record{
     @ManyToOne
     private Course course;
     
-    public Ingredient(RecordStatus status, Long id, String name, String description, Double price, Course course) {
+    public Ingredient(RecordStatus status, Long ingredientId, String name, String description, Double price, Course course) {
         super(status);
-        this.id = id;
+        this.ingredientId = ingredientId;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -37,43 +37,43 @@ public class Ingredient extends Record{
     public Ingredient() {
     
     }
-    
-    public Long getId() {
-        return id;
+
+    public Long getIngredientId() {
+        return ingredientId;
     }
-    
-    public void setId(Long id) {
-        this.id = id;
+
+    public void setIngredientId(Long ingredientId) {
+        this.ingredientId = ingredientId;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public Double getPrice() {
         return price;
     }
-    
+
     public void setPrice(Double price) {
         this.price = price;
     }
-    
+
     public Course getCourse() {
         return course;
     }
-    
+
     public void setCourse(Course course) {
         this.course = course;
     }
