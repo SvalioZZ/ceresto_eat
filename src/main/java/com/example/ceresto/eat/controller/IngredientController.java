@@ -33,6 +33,11 @@ public class IngredientController {
         return ingredientRepository.findById(id);
     }
 
+    @GetMapping("/get-by-type")
+    public List<Ingredient> getByType(@PathVariable("type") String type){
+        return ingredientRepository.getFromType(type);
+    }
+
     @PutMapping("/update/{id}")
     public String updateById(@PathVariable Long id, @RequestBody Ingredient ingredient){
         ingredientRepository.deleteById(id);
@@ -62,7 +67,7 @@ public class IngredientController {
     }
     
     @GetMapping("/get-by-name/{name}")
-    public List<Course> getByName(@PathVariable("name") String name) {
+    public List<Ingredient> getByName(@PathVariable("name") String name) {
         return ingredientRepository.getFromName(name);
     }
 }

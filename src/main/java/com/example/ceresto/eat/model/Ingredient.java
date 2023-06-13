@@ -1,5 +1,6 @@
 package com.example.ceresto.eat.model;
 
+import com.example.ceresto.eat.enumerati.IngredientTypeEnum;
 import com.example.ceresto.eat.enumerati.RecordStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -20,17 +21,21 @@ public class Ingredient extends Record{
     
     @Column(nullable = false)
     private Double price;
+
+    @Column(nullable = false)
+    private IngredientTypeEnum type;
     
     @JsonBackReference
     @ManyToOne
     private Course course;
     
-    public Ingredient(RecordStatus status, Long ingredientId, String name, String description, Double price, Course course) {
+    public Ingredient(RecordStatus status, Long ingredientId, String name, String description, Double price, IngredientTypeEnum type, Course course) {
         super(status);
         this.ingredientId = ingredientId;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.type = type;
         this.course = course;
     }
     
@@ -76,5 +81,13 @@ public class Ingredient extends Record{
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public IngredientTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(IngredientTypeEnum type) {
+        this.type = type;
     }
 }

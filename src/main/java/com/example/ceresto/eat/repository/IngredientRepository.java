@@ -20,6 +20,8 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "ingredient_id") Long id);
     
     @Query(value = "SELECT * FROM ingredient WHERE name = :name", nativeQuery = true)
-    List<Course> getFromName (@Param("name") String name);
+    List<Ingredient> getFromName (@Param("name") String name);
 
+    @Query(value = "SELECT * FROM ingredient WHERE type = :type", nativeQuery = true)
+    List<Ingredient> getFromType(String type);
 }

@@ -39,6 +39,11 @@ public class CourseController {
         return courseRepository.findById(id);
     }
 
+    @GetMapping("/get-by-type")
+    public List<Course> getByType(@PathVariable("type") String type){
+        return courseRepository.getFromType(type);
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Course course) {
         courseRepository.deleteById(id);
@@ -66,5 +71,8 @@ public class CourseController {
 
         return ResponseEntity.ok("Course with id " + id + "status changed to " + courseToSet.getStatus());
     }
+
+
+
 
 }

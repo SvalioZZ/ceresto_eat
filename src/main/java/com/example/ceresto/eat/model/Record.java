@@ -6,7 +6,7 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class Record {
-    @Column
+    @Column(nullable = false)
     private RecordStatus status;
 
     public Record(RecordStatus status) {

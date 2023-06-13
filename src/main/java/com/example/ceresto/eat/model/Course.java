@@ -1,5 +1,6 @@
 package com.example.ceresto.eat.model;
 
+import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.RecordStatus;
 import jakarta.persistence.*;
 
@@ -20,18 +21,22 @@ public class Course extends Record {
 
     @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
+    private CourseTypeEnum type;
     
     
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
     
 
-    public Course(RecordStatus status, Long courseId, String name, Double price, String description) {
+    public Course(RecordStatus status, Long courseId, String name, Double price, String description, CourseTypeEnum type) {
         super(status);
         this.courseId = courseId;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.type = type;
     }
 
     public Course() {
@@ -76,7 +81,15 @@ public class Course extends Record {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
+    public CourseTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(CourseTypeEnum type) {
+        this.type = type;
+    }
+
     public String getInfo() {
        return courseId + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
     }
