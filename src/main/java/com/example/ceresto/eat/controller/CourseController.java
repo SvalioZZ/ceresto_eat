@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -28,7 +30,19 @@ public class CourseController {
     
     @GetMapping("/get-by-name/{name}")
     public List<Course> getByName(@PathVariable("name") String name) {
-        return courseRepository.getFromName(name);
+        List<Course> courses = courseRepository.findAll();
+        List<Course> coursesByName = new ArrayList<>();
+        try {
+            for (Course course : courses) {
+                if (course.getName().equalsIgnoreCase(name)) {
+                    coursesByName.add(course);
+                }
+            }
+            return coursesByName;
+        }catch (NoSuchElementException e) {
+            System.err.println("Element not found \n" + e.getMessage());
+        }
+        return courses;
     }
 
     @GetMapping("/get-by-id/{id}")
@@ -52,4 +66,5 @@ public class CourseController {
     public void deleteAll() {
         courseRepository.deleteAll();
     }
+    
 }

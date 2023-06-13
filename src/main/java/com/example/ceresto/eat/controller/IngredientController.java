@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/ingredients")
+@RequestMapping("/api/ingredients")
 public class IngredientController {
     @Autowired
     private IngredientRepository ingredientRepository;
@@ -42,7 +42,7 @@ public class IngredientController {
         ingredientRepository.deleteById(id);
     }
 
-    @DeleteMapping("deleteAll")
+    @DeleteMapping("delete-all")
     public void deleteAll() {
         ingredientRepository.deleteAll();
     }

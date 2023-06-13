@@ -19,7 +19,7 @@ public class DiningTableController {
         diningTableRepository.saveAndFlush(table);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public List<DiningTable> getAll() {
         return diningTableRepository.findAll();
     }
@@ -41,7 +41,7 @@ public class DiningTableController {
         diningTableRepository.deleteById(id);
     }
 
-    @DeleteMapping("deleteAll")
+    @DeleteMapping("delete-all")
     public void deleteAll() {
         diningTableRepository.deleteAll();
     }

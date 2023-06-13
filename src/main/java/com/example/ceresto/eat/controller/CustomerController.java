@@ -19,7 +19,7 @@ public class CustomerController {
         customerRepository.saveAndFlush(customer);
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public List<Customer> getAll() {
         return customerRepository.findAll();
     }
@@ -41,7 +41,7 @@ public class CustomerController {
         customerRepository.deleteById(id);
     }
 
-    @DeleteMapping("deleteAll")
+    @DeleteMapping("delete-all")
     public void deleteAll() {
         customerRepository.deleteAll();
     }
