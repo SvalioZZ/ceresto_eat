@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update Ingredient SET status = :status WHERE ingredient_id = :ingredient_id")
+    @Query(value = "update Ingredient SET status = :status WHERE ingredient_id = :ingredient_id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "ingredient_id") Long id);
 
 

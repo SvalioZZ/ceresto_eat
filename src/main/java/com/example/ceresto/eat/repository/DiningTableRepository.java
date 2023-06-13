@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface DiningTableRepository extends JpaRepository<DiningTable, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update Dining_table SET status = :status WHERE table_id = :table_id")
+    @Query(value = "update Dining_table SET status = :status WHERE table_id = :table_id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "table_id") Long id);
 
 

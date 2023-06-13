@@ -5,7 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Record {
+public class Record {
     @Column
     private RecordStatus status;
 

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update Customer SET status = :status WHERE customer_id = :customer_id")
+    @Query(value = "update Customer SET status = :status WHERE customer_id = :customer_id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "customer_id") Long id);
 
 
