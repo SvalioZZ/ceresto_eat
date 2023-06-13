@@ -60,4 +60,9 @@ public class IngredientController {
 
         return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + ingredientToSet.getStatus());
     }
+    
+    @GetMapping("/get-by-name/{name}")
+    public List<Course> getByName(@PathVariable("name") String name) {
+        return ingredientRepository.getFromName(name);
+    }
 }

@@ -59,6 +59,10 @@ public class DiningTableController {
 
         return ResponseEntity.ok("Table with id " + id + "status changed to " + tableToSet.getStatus());
     }
-
+    
+    @GetMapping("/get-by-name/{name}")
+    public List<Course> getByName(@PathVariable("name") String name) {
+        return diningTableRepository.getFromName(name);
+    }
 
 }

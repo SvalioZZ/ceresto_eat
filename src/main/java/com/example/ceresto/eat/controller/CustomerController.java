@@ -59,6 +59,11 @@ public class CustomerController {
 
         return ResponseEntity.ok("Customer with id " + id + "status changed to " + customerToSet.getStatus());
     }
+    
+    @GetMapping("/get-by-name/{name}")
+    public List<Course> getByName(@PathVariable("name") String name) {
+        return customerRepository.getFromName(name);
+    }
 
 
 }
