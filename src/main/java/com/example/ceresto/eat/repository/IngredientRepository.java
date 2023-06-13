@@ -14,7 +14,7 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
     @Query(value = "update Ingredient SET status = :status WHERE ingredient_id = :ingredient_id")
-    void updateStatusById(@Param(value = "status") RecordStatus recordStatus, @Param(value = "ingredient_id") Long id);
+    void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "ingredient_id") Long id);
 
 
 }
