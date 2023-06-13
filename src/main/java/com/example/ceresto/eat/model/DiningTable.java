@@ -17,8 +17,8 @@ public class DiningTable extends Record {
     @Column(nullable = false)
     private String description;
 
-    public DiningTable(Long tableId, Integer tableAvailability, String description) {
-        super(RecordStatus.ACTIVE);
+    public DiningTable(RecordStatus status, Long tableId, Integer tableAvailability, String description) {
+        super(status);
         this.tableId = tableId;
         this.tableAvailability = tableAvailability;
         this.description = description;

@@ -38,7 +38,7 @@ public class Customer extends Record {
     private Long creditCardNumber;
 
     public Customer(RecordStatus status, Long customerId, String name, String surname, Integer age, String password, String address, String email, String diet, String phoneNumber, Long creditCardNumber) {
-        super(RecordStatus.ACTIVE);
+        super(status);
         this.customerId = customerId;
         this.name = name;
         this.surname = surname;

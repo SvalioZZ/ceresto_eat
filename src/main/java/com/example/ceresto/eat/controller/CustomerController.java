@@ -1,15 +1,18 @@
 package com.example.ceresto.eat.controller;
 
+import com.example.ceresto.eat.enumerati.RecordStatus;
+import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.Customer;
 import com.example.ceresto.eat.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
@@ -30,7 +33,7 @@ public class CustomerController {
     }
 
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id, @RequestBody Customer customer){
+    public String updateById(@PathVariable Long id, @RequestBody Customer customer){
         customerRepository.deleteById(id);
         customerRepository.save(customer);
         return "Customer updated";
@@ -44,6 +47,17 @@ public class CustomerController {
     @DeleteMapping("delete-all")
     public void deleteAll() {
         customerRepository.deleteAll();
+    }
+
+    @PatchMapping("/set-status/{id}")
+    public ResponseEntity<String> setStatusById(@PathVariable Long id) {
+        Customer customerToSet = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+        if (customerToSet.getStatus().equals(RecordStatus.ACTIVE)) {
+            customerToSet.setStatus(RecordStatus.DELETED);
+        } else customerToSet.setStatus(RecordStatus.ACTIVE);
+        customerRepository.updateStatusById(customerToSet.getStatus(), id);
+
+        return ResponseEntity.ok("Customer with id " + id + "status changed to " + customerToSet.getStatus());
     }
 
 

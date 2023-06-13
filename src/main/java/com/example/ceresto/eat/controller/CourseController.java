@@ -1,5 +1,6 @@
 package com.example.ceresto.eat.controller;
 
+import com.example.ceresto.eat.enumerati.RecordStatus;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class CourseController {
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
-    
+
     @GetMapping("/get-by-name/{name}")
     public List<Course> getByName(@PathVariable("name") String name) {
         List<Course> courses = courseRepository.findAll();
@@ -39,7 +40,7 @@ public class CourseController {
                 }
             }
             return coursesByName;
-        }catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             System.err.println("Element not found \n" + e.getMessage());
         }
         return courses;
@@ -51,7 +52,7 @@ public class CourseController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> modifyById(@PathVariable Long id, @RequestBody Course course){
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Course course) {
         courseRepository.deleteById(id);
         courseRepository.save(course);
         return new ResponseEntity<>("Course with id " + id + ":\n" + course.getInfo(), HttpStatusCode.valueOf(200));
@@ -66,5 +67,16 @@ public class CourseController {
     public void deleteAll() {
         courseRepository.deleteAll();
     }
-    
+
+    @PatchMapping("/set-status/{id}")
+    public ResponseEntity<String> setStatusById(@PathVariable Long id) {
+        Course courseToSet = courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
+        if (courseToSet.getStatus().equals(RecordStatus.ACTIVE)) {
+            courseToSet.setStatus(RecordStatus.DELETED);
+        } else courseToSet.setStatus(RecordStatus.ACTIVE);
+        courseRepository.updateStatusById(courseToSet.getStatus(), id);
+
+        return ResponseEntity.ok("Course with id " + id + "status changed to " + courseToSet.getStatus());
+    }
+
 }

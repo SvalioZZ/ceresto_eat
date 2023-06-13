@@ -27,7 +27,7 @@ public class Course extends Record {
     
 
     public Course(RecordStatus status, Long courseId, String name, Double price, String description) {
-        super(RecordStatus.ACTIVE);
+        super(status);
         this.courseId = courseId;
         this.name = name;
         this.price = price;

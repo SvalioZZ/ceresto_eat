@@ -1,9 +1,12 @@
 package com.example.ceresto.eat.controller;
 
+import com.example.ceresto.eat.enumerati.RecordStatus;
+import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.Customer;
 import com.example.ceresto.eat.model.Ingredient;
 import com.example.ceresto.eat.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +34,7 @@ public class IngredientController {
     }
 
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id, @RequestBody Ingredient ingredient){
+    public String updateById(@PathVariable Long id, @RequestBody Ingredient ingredient){
         ingredientRepository.deleteById(id);
         ingredientRepository.save(ingredient);
         return "Ingredient updated";
@@ -45,5 +48,16 @@ public class IngredientController {
     @DeleteMapping("delete-all")
     public void deleteAll() {
         ingredientRepository.deleteAll();
+    }
+
+    @PatchMapping("/set-status/{id}")
+    public ResponseEntity<String> setStatusById(@PathVariable Long id) {
+        Ingredient ingredientToSet = ingredientRepository.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
+        if (ingredientToSet.getStatus().equals(RecordStatus.ACTIVE)) {
+            ingredientToSet.setStatus(RecordStatus.DELETED);
+        } else ingredientToSet.setStatus(RecordStatus.ACTIVE);
+        ingredientRepository.updateStatusById(ingredientToSet.getStatus(), id);
+
+        return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + ingredientToSet.getStatus());
     }
 }
