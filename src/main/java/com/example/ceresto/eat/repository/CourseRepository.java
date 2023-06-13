@@ -15,8 +15,10 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update Course SET status = :status WHERE course_id = :course_id")
+    @Query(value = "update course SET status = :status WHERE course_id = :course_id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "course_id") Long id);
-
+    
+    @Query(value = "SELECT * FROM course WHERE name = :name", nativeQuery = true)
+    List<Course> getFromName (@Param("name") String name);
 
 }
