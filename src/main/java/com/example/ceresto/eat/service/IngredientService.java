@@ -10,7 +10,4 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
     
-    public IngredientService(IngredientRepository ingredientRepository) {
-        this.ingredientRepository = ingredientRepository;
-    }
 }

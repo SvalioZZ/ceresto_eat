@@ -10,7 +10,4 @@ public class DiningTableService {
     @Autowired
     private DiningTableRepository diningTableRepository;
     
-    public DiningTableService(DiningTableRepository diningTableRepository) {
-        this.diningTableRepository = diningTableRepository;
-    }
 }
