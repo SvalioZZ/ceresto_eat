@@ -1,14 +1,14 @@
 package com.example.ceresto.eat.model;
 
-import com.example.ceresto.eat.enumerati.RecordStatus;
+import com.example.ceresto.eat.enumerati.AuditEnum;
 import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Customer extends Record {
+public class Customer extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -37,9 +37,9 @@ public class Customer extends Record {
     @Column(nullable = false)
     private Long creditCardNumber;
 
-    public Customer(RecordStatus status, Long customerId, String name, String surname, Integer age, String password, String address, String email, String diet, String phoneNumber, Long creditCardNumber) {
-        super(status);
-        this.customerId = customerId;
+    public Customer(AuditEnum audit, Long id, String name, String surname, Integer age, String password, String address, String email, String diet, String phoneNumber, Long creditCardNumber) {
+        super(audit);
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -54,12 +54,12 @@ public class Customer extends Record {
     public Customer() {
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -1,6 +1,6 @@
 package com.example.ceresto.eat.repository;
 
-import com.example.ceresto.eat.enumerati.RecordStatus;
+import com.example.ceresto.eat.enumerati.AuditEnum;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.DiningTable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,8 +16,8 @@ import java.util.List;
 public interface DiningTableRepository extends JpaRepository<DiningTable, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update dining_table SET status = :status WHERE table_id = :table_id", nativeQuery = true)
-    void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "table_id") Long id);
+    @Query(value = "update dining_table SET audit = :audit WHERE id = :id", nativeQuery = true)
+    void updateStatusById(@Param(value = "audit") AuditEnum audit, @Param(value = "id") Long id);
     
     @Query(value = "SELECT * FROM dining_table WHERE name = :name", nativeQuery = true)
     List<Course> getFromName (@Param("name") String name);

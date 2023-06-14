@@ -1,12 +1,10 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.RecordStatus;
-import com.example.ceresto.eat.model.Course;
+import com.example.ceresto.eat.enumerati.AuditEnum;
 import com.example.ceresto.eat.model.Customer;
 import com.example.ceresto.eat.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,16 +52,16 @@ public class CustomerController {
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
         Customer customerToSet = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
-        if (customerToSet.getStatus().equals(RecordStatus.ACTIVE)) {
-            customerToSet.setStatus(RecordStatus.DELETED);
-        } else customerToSet.setStatus(RecordStatus.ACTIVE);
-        customerRepository.updateStatusById(customerToSet.getStatus(), id);
+        if (customerToSet.getAudit().equals(AuditEnum.ACTIVE)) {
+            customerToSet.setAudit(AuditEnum.DELETED);
+        } else customerToSet.setAudit(AuditEnum.ACTIVE);
+        customerRepository.updateStatusById(customerToSet.getAudit(), id);
 
-        return ResponseEntity.ok("Customer with id " + id + "status changed to " + customerToSet.getStatus());
+        return ResponseEntity.ok("Customer with id " + id + "status changed to " + customerToSet.getAudit());
     }
     
     @GetMapping("/get-by-name/{name}")
-    public ResponseEntity<Optional<Course>> getByName(@PathVariable("name") String name) {
+    public ResponseEntity<Optional<Customer>> getByName(@PathVariable("name") String name) {
         return new ResponseEntity<>(customerRepository.getFromName(name), HttpStatus.OK);
     }
 

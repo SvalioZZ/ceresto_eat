@@ -1,6 +1,6 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.RecordStatus;
+import com.example.ceresto.eat.enumerati.AuditEnum;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.DiningTable;
 import com.example.ceresto.eat.repository.DiningTableRepository;
@@ -52,12 +52,12 @@ public class DiningTableController {
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
         DiningTable tableToSet = diningTableRepository.findById(id).orElseThrow(() -> new RuntimeException("Table not found"));
-        if (tableToSet.getStatus().equals(RecordStatus.ACTIVE)) {
-            tableToSet.setStatus(RecordStatus.DELETED);
-        } else tableToSet.setStatus(RecordStatus.ACTIVE);
-        diningTableRepository.updateStatusById(tableToSet.getStatus(), id);
+        if (tableToSet.getAudit().equals(AuditEnum.ACTIVE)) {
+            tableToSet.setAudit(AuditEnum.DELETED);
+        } else tableToSet.setAudit(AuditEnum.ACTIVE);
+        diningTableRepository.updateStatusById(tableToSet.getAudit(), id);
 
-        return ResponseEntity.ok("Table with id " + id + "status changed to " + tableToSet.getStatus());
+        return ResponseEntity.ok("Table with id " + id + "status changed to " + tableToSet.getAudit());
     }
     
     @GetMapping("/get-by-name/{name}")

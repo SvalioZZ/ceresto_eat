@@ -1,8 +1,6 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.RecordStatus;
-import com.example.ceresto.eat.model.Course;
-import com.example.ceresto.eat.model.Customer;
+import com.example.ceresto.eat.enumerati.AuditEnum;
 import com.example.ceresto.eat.model.Ingredient;
 import com.example.ceresto.eat.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,12 +56,12 @@ public class IngredientController {
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
         Ingredient ingredientToSet = ingredientRepository.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
-        if (ingredientToSet.getStatus().equals(RecordStatus.ACTIVE)) {
-            ingredientToSet.setStatus(RecordStatus.DELETED);
-        } else ingredientToSet.setStatus(RecordStatus.ACTIVE);
-        ingredientRepository.updateStatusById(ingredientToSet.getStatus(), id);
+        if (ingredientToSet.getAudit().equals(AuditEnum.ACTIVE)) {
+            ingredientToSet.setAudit(AuditEnum.DELETED);
+        } else ingredientToSet.setAudit(AuditEnum.ACTIVE);
+        ingredientRepository.updateStatusById(ingredientToSet.getAudit(), id);
 
-        return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + ingredientToSet.getStatus());
+        return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + ingredientToSet.getAudit());
     }
     
     @GetMapping("/get-by-name/{name}")

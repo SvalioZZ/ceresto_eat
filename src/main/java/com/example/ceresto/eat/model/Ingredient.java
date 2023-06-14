@@ -1,17 +1,17 @@
 package com.example.ceresto.eat.model;
 
+import com.example.ceresto.eat.enumerati.AuditEnum;
 import com.example.ceresto.eat.enumerati.IngredientTypeEnum;
-import com.example.ceresto.eat.enumerati.RecordStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Ingredient extends Record{
+public class Ingredient extends AuditableEntity{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ingredientId;
+    private Long id;
     
     @Column(nullable = false)
     private String name;
@@ -29,9 +29,9 @@ public class Ingredient extends Record{
     @ManyToOne
     private Course course;
     
-    public Ingredient(RecordStatus status, Long ingredientId, String name, String description, Double price, IngredientTypeEnum type, Course course) {
-        super(status);
-        this.ingredientId = ingredientId;
+    public Ingredient(AuditEnum audit, Long id, String name, String description, Double price, IngredientTypeEnum type, Course course) {
+        super(audit);
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -43,12 +43,12 @@ public class Ingredient extends Record{
     
     }
 
-    public Long getIngredientId() {
-        return ingredientId;
+    public Long getId() {
+        return id;
     }
 
-    public void setIngredientId(Long ingredientId) {
-        this.ingredientId = ingredientId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

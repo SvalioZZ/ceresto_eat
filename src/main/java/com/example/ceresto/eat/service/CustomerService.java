@@ -14,6 +14,6 @@ public class CustomerService {
     private CustomerRepository customerRepository;
     
    public Optional<Customer> getCustomerFromId(Long id) {
-       return customerRepository.getById(id);
+       return Optional.of(customerRepository.getReferenceById(id));
    }
 }

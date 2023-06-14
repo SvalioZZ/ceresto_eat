@@ -1,11 +1,11 @@
 package com.example.ceresto.eat.enumerati;
 
-public enum RecordStatus {
+public enum AuditEnum {
     DELETED("D"), ACTIVE("A");
 
     private String code;
 
-    RecordStatus(String code) {
+    AuditEnum(String code) {
         this.code = code;
     }
 

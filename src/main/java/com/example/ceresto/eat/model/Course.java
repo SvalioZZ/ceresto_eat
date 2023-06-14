@@ -1,19 +1,18 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.CourseTypeEnum;
-import com.example.ceresto.eat.enumerati.RecordStatus;
+import com.example.ceresto.eat.enumerati.AuditEnum;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table
-public class Course extends Record {
+public class Course extends AuditableEntity {
     
-    //TODO solo Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long courseId;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -32,9 +31,9 @@ public class Course extends Record {
     private List<Ingredient> ingredients;
     
 
-    public Course(RecordStatus status, Long courseId, String name, Double price, String description, CourseTypeEnum type) {
-        super(status);
-        this.courseId = courseId;
+    public Course(AuditEnum audit, Long id, String name, Double price, String description, CourseTypeEnum type) {
+        super(audit);
+        this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -44,12 +43,12 @@ public class Course extends Record {
     public Course() {
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -93,7 +92,7 @@ public class Course extends Record {
     }
 
     public String getInfo() {
-       return courseId + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
+       return id + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
     }
 
 }
