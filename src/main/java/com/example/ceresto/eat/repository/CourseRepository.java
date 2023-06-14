@@ -19,7 +19,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
     @Query(value = "update course SET audit = :audit WHERE id = :id", nativeQuery = true)
-    void updateStatusById(@Param(value = "status") AuditEnum audit, @Param(value = "id") Long id);
+    void updateStatusById(@Param(value = "audit") AuditEnum audit, @Param(value = "id") Long id);
     
     @Query(value = "SELECT * FROM course WHERE name = :name", nativeQuery = true)
     List<Course> getFromName (@Param("name") String name);
