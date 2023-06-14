@@ -3,6 +3,8 @@ package com.example.ceresto.eat.model;
 import com.example.ceresto.eat.enumerati.AuditEnum;
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 
 @Entity
 @Table
@@ -17,8 +19,9 @@ public class DiningTable extends AuditableEntity {
     @Column(nullable = false)
     private String description;
 
-    public DiningTable(AuditEnum audit, Long id, Integer tableAvailability, String description) {
-        super(audit);
+    public DiningTable(AuditEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+                       Long id, Integer tableAvailability, String description) {
+        super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.tableAvailability = tableAvailability;
         this.description = description;

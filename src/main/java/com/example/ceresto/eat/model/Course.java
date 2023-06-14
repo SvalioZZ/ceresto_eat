@@ -4,6 +4,7 @@ import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.AuditEnum;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,15 +30,18 @@ public class Course extends AuditableEntity {
     
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
-    
 
-    public Course(AuditEnum audit, Long id, String name, Double price, String description, CourseTypeEnum type) {
-        super(audit);
+
+    public Course(AuditEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+                  Long id, String name, Double price, String description, CourseTypeEnum type,
+                  List<Ingredient> ingredients) {
+        super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.type = type;
+        this.ingredients = ingredients;
     }
 
     public Course() {
