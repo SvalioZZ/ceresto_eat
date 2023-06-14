@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
@@ -20,6 +21,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     void updateStatusById(@Param(value = "status") RecordStatus status, @Param(value = "customer_id") Long id);
     
     @Query(value = "SELECT * FROM customer WHERE name = :name", nativeQuery = true)
-    List<Course> getFromName (@Param("name") String name);
+    Optional<Course> getFromName (@Param("name") String name);
 
 }

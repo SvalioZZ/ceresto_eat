@@ -4,6 +4,7 @@ import com.example.ceresto.eat.enumerati.RecordStatus;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +29,18 @@ public class CourseController {
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
+    
+    //TODO vediamo di combinare qualcosa qui dentro
 
-    @GetMapping("/get-by-name/{name}")
-    public List<Course> getByName(@PathVariable("name") String name) {
-        return courseRepository.getFromName(name);
+   /* @GetMapping("/get-by-name/{name}")
+    public ResponseEntity<Course> (@PathVariable("name") String name) {
+        if (courseRepository.getByName(name).isPresent()) {
+            return ResponseEntity.ok().build();
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-
+*/
     @GetMapping("/get-by-id/{id}")
     public Optional<Course> getById(@PathVariable("id") Long id) {
         return courseRepository.findById(id);
@@ -61,8 +68,8 @@ public class CourseController {
         courseRepository.deleteAll();
     }
 
-    @PatchMapping("/set-status/{id}")
-    public ResponseEntity<String> setStatusById(@PathVariable Long id) {
+    @PatchMapping("/update-status/{id}")
+    public ResponseEntity<String> updateStatusById(@PathVariable Long id) {
         Course courseToSet = courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
         if (courseToSet.getStatus().equals(RecordStatus.ACTIVE)) {
             courseToSet.setStatus(RecordStatus.DELETED);

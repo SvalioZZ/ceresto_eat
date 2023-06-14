@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
+//TODO dobbiamo prelevare solo gli oggetti che hanno active come recordStatus
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
@@ -23,5 +26,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query(value = "SELECT * FROM course WHERE type = :type", nativeQuery = true)
     List<Course> getFromType (@Param("type") String type);
+    
+    Optional<Course> getByName(String name);
 
 }

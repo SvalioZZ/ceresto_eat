@@ -9,6 +9,8 @@ import java.util.List;
 @Entity
 @Table
 public class Course extends Record {
+    
+    //TODO solo Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;

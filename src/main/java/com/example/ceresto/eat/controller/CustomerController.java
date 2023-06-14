@@ -5,6 +5,8 @@ import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.Customer;
 import com.example.ceresto.eat.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,8 +63,8 @@ public class CustomerController {
     }
     
     @GetMapping("/get-by-name/{name}")
-    public List<Course> getByName(@PathVariable("name") String name) {
-        return customerRepository.getFromName(name);
+    public ResponseEntity<Optional<Course>> getByName(@PathVariable("name") String name) {
+        return new ResponseEntity<>(customerRepository.getFromName(name), HttpStatus.OK);
     }
 
 

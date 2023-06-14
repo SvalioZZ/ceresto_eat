@@ -4,6 +4,8 @@ import com.example.ceresto.eat.enumerati.RecordStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 
+//TODO AuditableEntity come nome per la classe
+
 @MappedSuperclass
 public class Record {
     @Column(nullable = false)
