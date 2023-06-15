@@ -1,6 +1,6 @@
 package com.example.ceresto.eat.model;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -19,7 +19,7 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @EntityListeners(AuditingEntityListener.class)
 public class AuditableEntity {
     @Column(nullable = false)
-    private AuditEnum audit;
+    protected StatusEnum status;
 
     @CreatedBy
     protected String createdBy;
@@ -35,8 +35,8 @@ public class AuditableEntity {
     @Temporal(TIMESTAMP)
     protected Date lastModifiedDate;
 
-    public AuditableEntity(AuditEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate) {
-        this.audit = audit;
+    public AuditableEntity(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate) {
+        this.status = status;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.lastModifiedBy = lastModifiedBy;
@@ -46,12 +46,12 @@ public class AuditableEntity {
     public AuditableEntity() {
     }
     
-    public AuditEnum getAudit() {
-        return audit;
+    public StatusEnum getStatus() {
+        return status;
     }
 
-    public void setAudit(AuditEnum audit) {
-        this.audit = audit;
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 
     public String getCreatedBy() {

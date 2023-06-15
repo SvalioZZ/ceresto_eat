@@ -1,6 +1,6 @@
 package com.example.ceresto.eat.model;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.enumerati.IngredientTypeEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -31,7 +31,7 @@ public class Ingredient extends AuditableEntity{
     @ManyToOne
     private Course course;
 
-    public Ingredient(AuditEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public Ingredient(StatusEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type, Course course) {
         super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;

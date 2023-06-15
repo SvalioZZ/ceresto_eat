@@ -1,6 +1,6 @@
 package com.example.ceresto.eat.repository;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,7 +19,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
     @Query(value = "update course SET audit = :audit WHERE id = :id", nativeQuery = true)
-    void updateStatusById(@Param(value = "audit") AuditEnum audit, @Param(value = "id") Long id);
+    void updateStatusById(@Param(value = "audit") StatusEnum audit, @Param(value = "id") Long id);
     
     @Query(value = "SELECT * FROM course WHERE name = :name", nativeQuery = true)
     List<Course> getFromName (@Param("name") String name);
@@ -28,5 +28,5 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> getFromType (@Param("type") String type);
     
     Optional<Course> getByName(String name);
-
+    Optional<Course> findByStatus(StatusEnum status);
 }

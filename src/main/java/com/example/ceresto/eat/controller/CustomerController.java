@@ -1,8 +1,10 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
+import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.Customer;
 import com.example.ceresto.eat.repository.CustomerRepository;
+import com.example.ceresto.eat.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerService customerService;
 
     @PostMapping("/create")
     public void create(@RequestBody Customer customer) {
@@ -30,6 +34,11 @@ public class CustomerController {
     @GetMapping("/get/{id}")
     public Optional<Customer> getById(@PathVariable Long id) {
         return customerRepository.findById(id);
+    }
+
+    @GetMapping ("/get-active-records")
+    public Optional<Customer> getActiveRecords(){
+        return customerService.getByStatus(StatusEnum.ACTIVE);
     }
 
     @PutMapping("/update/{id}")
@@ -52,12 +61,12 @@ public class CustomerController {
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
         Customer customerToSet = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
-        if (customerToSet.getAudit().equals(AuditEnum.ACTIVE)) {
-            customerToSet.setAudit(AuditEnum.DELETED);
-        } else customerToSet.setAudit(AuditEnum.ACTIVE);
-        customerRepository.updateStatusById(customerToSet.getAudit(), id);
+        if (customerToSet.getStatus().equals(StatusEnum.ACTIVE)) {
+            customerToSet.setStatus(StatusEnum.DELETED);
+        } else customerToSet.setStatus(StatusEnum.ACTIVE);
+        customerRepository.updateStatusById(customerToSet.getStatus(), id);
 
-        return ResponseEntity.ok("Customer with id " + id + "status changed to " + customerToSet.getAudit());
+        return ResponseEntity.ok("Customer with id " + id + "status changed to " + customerToSet.getStatus());
     }
     
     @GetMapping("/get-by-name/{name}")

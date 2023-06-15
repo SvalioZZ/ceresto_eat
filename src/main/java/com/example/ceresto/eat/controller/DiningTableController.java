@@ -1,9 +1,10 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.DiningTable;
 import com.example.ceresto.eat.repository.DiningTableRepository;
+import com.example.ceresto.eat.service.DiningTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import java.util.Optional;
 public class DiningTableController {
     @Autowired
     private DiningTableRepository diningTableRepository;
+    @Autowired
+    private DiningTableService diningTableService;
 
     @PostMapping("/create")
     public void create(@RequestBody DiningTable table) {
@@ -30,6 +33,11 @@ public class DiningTableController {
     @GetMapping("/get/{id}")
     public Optional<DiningTable> getById(@PathVariable Long id) {
         return diningTableRepository.findById(id);
+    }
+
+    @GetMapping ("/get-active-records")
+    public Optional<DiningTable> getActiveRecords(){
+        return diningTableService.getByStatus(StatusEnum.ACTIVE);
     }
 
     @PutMapping("/update/{id}")
@@ -52,12 +60,12 @@ public class DiningTableController {
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
         DiningTable tableToSet = diningTableRepository.findById(id).orElseThrow(() -> new RuntimeException("Table not found"));
-        if (tableToSet.getAudit().equals(AuditEnum.ACTIVE)) {
-            tableToSet.setAudit(AuditEnum.DELETED);
-        } else tableToSet.setAudit(AuditEnum.ACTIVE);
-        diningTableRepository.updateStatusById(tableToSet.getAudit(), id);
+        if (tableToSet.getStatus().equals(StatusEnum.ACTIVE)) {
+            tableToSet.setStatus(StatusEnum.DELETED);
+        } else tableToSet.setStatus(StatusEnum.ACTIVE);
+        diningTableRepository.updateStatusById(tableToSet.getStatus(), id);
 
-        return ResponseEntity.ok("Table with id " + id + "status changed to " + tableToSet.getAudit());
+        return ResponseEntity.ok("Table with id " + id + "status changed to " + tableToSet.getStatus());
     }
     
     @GetMapping("/get-by-name/{name}")

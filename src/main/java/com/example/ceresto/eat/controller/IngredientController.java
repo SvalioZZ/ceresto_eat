@@ -1,8 +1,10 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
+import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.Ingredient;
 import com.example.ceresto.eat.repository.IngredientRepository;
+import com.example.ceresto.eat.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import java.util.Optional;
 public class IngredientController {
     @Autowired
     private IngredientRepository ingredientRepository;
+    @Autowired
+    private IngredientService ingredientService;
 
     @PostMapping("/create")
     public void create(@RequestBody Ingredient ingredient) {
@@ -34,6 +38,11 @@ public class IngredientController {
     @GetMapping("/get-by-type")
     public List<Ingredient> getByType(@PathVariable("type") String type){
         return ingredientRepository.getFromType(type);
+    }
+
+    @GetMapping ("/get-active-records")
+    public Optional<Ingredient> getActiveRecords(){
+        return ingredientService.getByStatus(StatusEnum.ACTIVE);
     }
 
     @PutMapping("/update/{id}")
@@ -56,12 +65,12 @@ public class IngredientController {
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
         Ingredient ingredientToSet = ingredientRepository.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
-        if (ingredientToSet.getAudit().equals(AuditEnum.ACTIVE)) {
-            ingredientToSet.setAudit(AuditEnum.DELETED);
-        } else ingredientToSet.setAudit(AuditEnum.ACTIVE);
-        ingredientRepository.updateStatusById(ingredientToSet.getAudit(), id);
+        if (ingredientToSet.getStatus().equals(StatusEnum.ACTIVE)) {
+            ingredientToSet.setStatus(StatusEnum.DELETED);
+        } else ingredientToSet.setStatus(StatusEnum.ACTIVE);
+        ingredientRepository.updateStatusById(ingredientToSet.getStatus(), id);
 
-        return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + ingredientToSet.getAudit());
+        return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + ingredientToSet.getStatus());
     }
     
     @GetMapping("/get-by-name/{name}")

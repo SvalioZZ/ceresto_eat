@@ -1,6 +1,6 @@
 package com.example.ceresto.eat.model;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -39,7 +39,7 @@ public class Customer extends AuditableEntity {
     @Column(nullable = false)
     private Long creditCardNumber;
 
-    public Customer(AuditEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public Customer(StatusEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                     Long id, String name, String surname, Integer age, String password, String address, String email,
                     String diet, String phoneNumber, Long creditCardNumber) {
         super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);

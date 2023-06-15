@@ -1,8 +1,9 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.repository.CourseRepository;
+import com.example.ceresto.eat.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,6 +17,9 @@ import java.util.Optional;
 public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private CourseService courseService;
 
     @PostMapping("/create")
     public void createCourse(@RequestBody Course course) {
@@ -38,9 +42,14 @@ public class CourseController {
         return courseRepository.findById(id);
     }
 
-    @GetMapping("/get-by-type")
+    @GetMapping("/get-by-type/{type}")
     public List<Course> getByType(@PathVariable("type") String type){
         return courseRepository.getFromType(type);
+    }
+
+    @GetMapping ("/get-active-records")
+    public Optional<Course> getActiveRecords(){
+        return courseService.getByStatus(StatusEnum.ACTIVE);
     }
 
     @PutMapping("/update/{id}")
@@ -63,12 +72,12 @@ public class CourseController {
     @PatchMapping("/update-status/{id}")
     public ResponseEntity<String> updateStatusById(@PathVariable Long id) {
         Course courseToSet = courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
-        if (courseToSet.getAudit().equals(AuditEnum.ACTIVE)) {
-            courseToSet.setAudit(AuditEnum.DELETED);
-        } else courseToSet.setAudit(AuditEnum.ACTIVE);
-        courseRepository.updateStatusById(courseToSet.getAudit(), id);
+        if (courseToSet.getStatus().equals(StatusEnum.ACTIVE)) {
+            courseToSet.setStatus(StatusEnum.DELETED);
+        } else courseToSet.setStatus(StatusEnum.ACTIVE);
+        courseRepository.updateStatusById(courseToSet.getStatus(), id);
 
-        return ResponseEntity.ok("Course with id " + id + "status changed to " + courseToSet.getAudit());
+        return ResponseEntity.ok("Course with id " + id + "status changed to " + courseToSet.getStatus());
     }
 
 

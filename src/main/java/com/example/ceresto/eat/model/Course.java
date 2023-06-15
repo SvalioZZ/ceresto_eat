@@ -1,7 +1,7 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.CourseTypeEnum;
-import com.example.ceresto.eat.enumerati.AuditEnum;
+import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -32,7 +32,7 @@ public class Course extends AuditableEntity {
     private List<Ingredient> ingredients;
 
 
-    public Course(AuditEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public Course(StatusEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                   Long id, String name, Double price, String description, CourseTypeEnum type,
                   List<Ingredient> ingredients) {
         super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
