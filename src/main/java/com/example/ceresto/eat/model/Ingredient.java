@@ -31,9 +31,9 @@ public class Ingredient extends AuditableEntity{
     @ManyToOne
     private Course course;
 
-    public Ingredient(StatusEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public Ingredient(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type, Course course) {
-        super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
         this.description = description;

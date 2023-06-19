@@ -32,10 +32,10 @@ public class Course extends AuditableEntity {
     private List<Ingredient> ingredients;
 
 
-    public Course(StatusEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public Course(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                   Long id, String name, Double price, String description, CourseTypeEnum type,
                   List<Ingredient> ingredients) {
-        super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
         this.price = price;

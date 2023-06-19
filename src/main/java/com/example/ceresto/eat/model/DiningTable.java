@@ -19,9 +19,9 @@ public class DiningTable extends AuditableEntity {
     @Column(nullable = false)
     private String description;
 
-    public DiningTable(StatusEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public DiningTable(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                        Long id, Integer tableAvailability, String description) {
-        super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.tableAvailability = tableAvailability;
         this.description = description;

@@ -39,10 +39,10 @@ public class Customer extends AuditableEntity {
     @Column(nullable = false)
     private Long creditCardNumber;
 
-    public Customer(StatusEnum audit, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public Customer(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                     Long id, String name, String surname, Integer age, String password, String address, String email,
                     String diet, String phoneNumber, Long creditCardNumber) {
-        super(audit, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
         this.surname = surname;
