@@ -2,13 +2,15 @@ package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "course")
 public class Course extends AuditableEntity {
     
     @Id
@@ -31,24 +33,16 @@ public class Course extends AuditableEntity {
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
     
-    @Column(nullable = false)
-    private String createdBy;
-    
-    @Column(nullable = false)
-    private Date createdDate;
-    
-    @Column(nullable = false)
-    private String lastModifiedBy;
-    
-    @Column(nullable = false)
-    private Date lastModifiedDate;
-    
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
+    
+    @JsonBackReference
+    @ManyToOne
+    private Orders orders;
 
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
-                  List<Ingredient> ingredients, StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate) {
+                  List<Ingredient> ingredients, Orders orders, StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
@@ -56,6 +50,7 @@ public class Course extends AuditableEntity {
         this.description = description;
         this.type = type;
         this.ingredients = ingredients;
+        this.orders = orders;
     }
 
     public Course() {

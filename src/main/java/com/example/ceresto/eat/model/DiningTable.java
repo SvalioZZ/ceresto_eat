@@ -1,13 +1,15 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
-@Table
+@Table(name = "diningTable")
 public class DiningTable extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +20,19 @@ public class DiningTable extends AuditableEntity {
 
     @Column(nullable = false)
     private String description;
+    
+    @JsonBackReference
+    @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Orders> orders;
+    
 
     public DiningTable(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
-                       Long id, Integer tableAvailability, String description) {
+                       Long id, Integer tableAvailability, String description, List<Orders> orders) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.tableAvailability = tableAvailability;
         this.description = description;
+        this.orders = orders;
     }
 
     public DiningTable() {

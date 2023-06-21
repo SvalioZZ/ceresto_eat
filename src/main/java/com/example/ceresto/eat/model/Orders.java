@@ -1,39 +1,36 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.Date;
-
-import static jakarta.persistence.TemporalType.TIMESTAMP;
+import java.util.List;
 
 @Entity
-@Table
-public class Order extends AuditableEntity {
+@Table(name = "orders")
+public class Orders extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private Date date;
 
-    @Column(nullable = false)
+    @ManyToOne(targetEntity = DiningTable.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private DiningTable diningTable;
 
-    @Column(nullable = false)
-    private Course course;
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Course> courses;
 
 
-    public Order(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate, Long id, DiningTable diningTable, Course course, Date date) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+    public Orders(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses, Date date) {
+        super(status);
         this.id = id;
         this.diningTable = diningTable;
-        this.course = course;
+        this.courses = courses;
         this.date = date;
     }
 
-    public Order() {
+    public Orders() {
     }
 
     public Long getId() {
@@ -52,12 +49,12 @@ public class Order extends AuditableEntity {
         this.diningTable = diningTable;
     }
 
-    public Course getCourse() {
-        return course;
+    public List<Course> getCourse() {
+        return courses;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(List<Course> courses) {
+        this.courses = courses;
     }
 
     public Date getDate() {

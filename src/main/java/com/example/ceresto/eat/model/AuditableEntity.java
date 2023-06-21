@@ -1,10 +1,7 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Temporal;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -19,21 +16,21 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @EntityListeners(AuditingEntityListener.class)
 public class AuditableEntity {
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private StatusEnum status;
-
-    @Column(nullable = false)
+    
     @CreatedBy
     private String createdBy;
-    @Column(nullable = false)
+    
     @CreatedDate
     @Temporal(TIMESTAMP)
     public Date createdDate;
 
-    @Column(nullable = false)
+    
     @LastModifiedBy
     private String lastModifiedBy;
 
-    @Column(nullable = false)
+    
     @LastModifiedDate
     @Temporal(TIMESTAMP)
     private Date lastModifiedDate;
@@ -47,6 +44,10 @@ public class AuditableEntity {
     }
 
     public AuditableEntity() {
+    }
+    
+    public AuditableEntity(StatusEnum status) {
+        this.status = status;
     }
     
     public StatusEnum getStatus() {
