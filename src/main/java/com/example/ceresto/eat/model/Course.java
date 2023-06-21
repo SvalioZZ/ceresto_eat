@@ -27,14 +27,28 @@ public class Course extends AuditableEntity {
     @Column(nullable = false)
     private CourseTypeEnum type;
     
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
+    
+    @Column(nullable = false)
+    private String createdBy;
+    
+    @Column(nullable = false)
+    private Date createdDate;
+    
+    @Column(nullable = false)
+    private String lastModifiedBy;
+    
+    @Column(nullable = false)
+    private Date lastModifiedDate;
     
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
 
 
-    public Course(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
-                  Long id, String name, Double price, String description, CourseTypeEnum type,
-                  List<Ingredient> ingredients) {
+    public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
+                  List<Ingredient> ingredients, StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;

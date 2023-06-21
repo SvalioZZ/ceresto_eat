@@ -19,21 +19,24 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @EntityListeners(AuditingEntityListener.class)
 public class AuditableEntity {
     @Column(nullable = false)
-    protected StatusEnum status;
+    private StatusEnum status;
 
+    @Column(nullable = false)
     @CreatedBy
-    protected String createdBy;
-
+    private String createdBy;
+    @Column(nullable = false)
     @CreatedDate
     @Temporal(TIMESTAMP)
-    protected Date createdDate;
+    public Date createdDate;
 
+    @Column(nullable = false)
     @LastModifiedBy
-    protected String lastModifiedBy;
+    private String lastModifiedBy;
 
+    @Column(nullable = false)
     @LastModifiedDate
     @Temporal(TIMESTAMP)
-    protected Date lastModifiedDate;
+    private Date lastModifiedDate;
 
     public AuditableEntity(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate) {
         this.status = status;
