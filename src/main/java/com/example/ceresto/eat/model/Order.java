@@ -11,23 +11,21 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 
 @Entity
 @Table
-public class Order extends AuditableEntity{
+public class Order extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    @Temporal(TIMESTAMP)
-    private LocalDate date;
+    private Date date;
 
-    @OneToMany
+    @Column(nullable = false)
     private DiningTable diningTable;
 
-    @JsonBackReference
-    @ManyToOne
+    @Column(nullable = false)
     private Course course;
 
 
-    public Order(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate, Long id, DiningTable diningTable, Course course, LocalDate date) {
+    public Order(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate, Long id, DiningTable diningTable, Course course, Date date) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.diningTable = diningTable;
@@ -62,11 +60,11 @@ public class Order extends AuditableEntity{
         this.course = course;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }
