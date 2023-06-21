@@ -39,6 +39,10 @@ public class Customer extends AuditableEntity {
     @Column(nullable = false)
     private Long creditCardNumber;
 
+    @OneToOne
+    @JoinColumn(name = "dining_table_id")
+    private DiningTable diningTable;
+
     public Customer(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
                     Long id, String name, String surname, Integer age, String password, String address, String email,
                     String diet, String phoneNumber, Long creditCardNumber) {

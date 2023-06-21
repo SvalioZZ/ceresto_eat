@@ -24,6 +24,9 @@ public class DiningTable extends AuditableEntity {
     @JsonBackReference
     @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Orders> orders;
+
+    @OneToOne(mappedBy = "diningTable")
+    private Customer customer;
     
 
     public DiningTable(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
