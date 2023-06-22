@@ -44,8 +44,9 @@ public class CourseController {
     }
 
     @GetMapping("/get-by-type/{type}")
-    public Optional<List<Course>> getByType(@PathVariable("type") CourseTypeEnum type){
-        return Optional.ofNullable(courseRepository.getFromType(String.valueOf(type)));
+    public ResponseEntity<List<Course>> getByType(@PathVariable("type") CourseTypeEnum type){
+        Optional<List<Course>> courseList = courseService.getByType(type);
+        return courseList.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping ("/get-active-records")

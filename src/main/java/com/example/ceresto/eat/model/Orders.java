@@ -22,8 +22,9 @@ public class Orders extends AuditableEntity {
     private List<Course> courses;
 
 
-    public Orders(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses, Date date) {
-        super(status);
+    public Orders(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses,
+                  Date date,String createdBy,Date createdDate,String lastModifiedBy,Date lastModifiedDate ) {
+        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.diningTable = diningTable;
         this.courses = courses;

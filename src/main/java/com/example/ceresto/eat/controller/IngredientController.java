@@ -30,13 +30,13 @@ public class IngredientController {
         return ingredientRepository.findAll();
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-by-id/{id}")
     public Optional<Ingredient> getById(@PathVariable Long id) {
         return ingredientRepository.findById(id);
     }
 
-    @GetMapping("/get-by-type/{type}")
-    public List<Ingredient> getByType(@PathVariable("type") String type){
+    @GetMapping("/get-by-type/")
+    public List<Ingredient> getByType(@RequestParam("type") String type){
         return ingredientRepository.getFromType(type);
     }
 

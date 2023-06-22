@@ -1,5 +1,6 @@
 package com.example.ceresto.eat.service;
 
+import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.repository.CourseRepository;
@@ -20,5 +21,9 @@ public class CourseService {
 
     public Optional<List<Course>> getByStatus(StatusEnum status) {
         return courseRepository.findByStatus(status);
+    }
+    
+    public Optional<List<Course>> getByType(CourseTypeEnum type) {
+        return courseRepository.getByType(type);
     }
 }
