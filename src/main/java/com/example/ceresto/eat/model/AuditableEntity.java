@@ -46,7 +46,8 @@ public class AuditableEntity {
     public AuditableEntity() {
     }
 
-    
+
+
     public StatusEnum getStatus() {
         return status;
     }

@@ -5,7 +5,9 @@ import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.Order;
+import org.springframework.beans.factory.config.SingletonBeanRegistry;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class Course extends AuditableEntity {
     private String description;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
 
 
@@ -46,6 +49,7 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
+        this.ingredients = new ArrayList<>();
     }
 
     public Course() {

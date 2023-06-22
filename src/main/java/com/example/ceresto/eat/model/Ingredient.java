@@ -32,14 +32,13 @@ public class Ingredient extends AuditableEntity{
     private Course course;
 
     public Ingredient(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
-                      Long id, String name, String description, Double price, IngredientTypeEnum type, Course course) {
+                      Long id, String name, String description, Double price, IngredientTypeEnum type) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.type = type;
-        this.course = course;
     }
 
     public Ingredient() {

@@ -35,7 +35,7 @@ public class IngredientController {
         return ingredientRepository.findById(id);
     }
 
-    @GetMapping("/get-by-type")
+    @GetMapping("/get-by-type/{type}")
     public List<Ingredient> getByType(@PathVariable("type") String type){
         return ingredientRepository.getFromType(type);
     }
