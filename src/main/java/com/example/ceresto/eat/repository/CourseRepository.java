@@ -1,5 +1,6 @@
 package com.example.ceresto.eat.repository;
 
+import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;

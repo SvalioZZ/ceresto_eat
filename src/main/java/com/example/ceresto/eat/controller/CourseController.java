@@ -1,5 +1,6 @@
 package com.example.ceresto.eat.controller;
 
+import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.repository.CourseRepository;
@@ -43,8 +44,8 @@ public class CourseController {
     }
 
     @GetMapping("/get-by-type/{type}")
-    public ResponseEntity<List<Course>> getByType(@PathVariable("type") String type){
-        return new ResponseEntity<>(courseRepository.getFromType(type), HttpStatus.OK);
+    public Optional<List<Course>> getByType(@PathVariable("type") CourseTypeEnum type){
+        return Optional.ofNullable(courseRepository.getFromType(String.valueOf(type)));
     }
 
     @GetMapping ("/get-active-records")

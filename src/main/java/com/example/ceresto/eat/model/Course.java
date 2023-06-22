@@ -29,6 +29,7 @@ public class Course extends AuditableEntity {
     private String description;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
 
 
