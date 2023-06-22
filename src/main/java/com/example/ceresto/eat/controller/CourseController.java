@@ -48,7 +48,7 @@ public class CourseController {
     }
 
     @GetMapping ("/get-active-records")
-    public Optional<Course> getActiveRecords(){
+    public Optional<List<Course>> getActiveRecords(){
         return courseService.getByStatus(StatusEnum.ACTIVE);
     }
 

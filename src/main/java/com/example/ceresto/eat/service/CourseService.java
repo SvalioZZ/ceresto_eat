@@ -6,6 +6,7 @@ import com.example.ceresto.eat.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,7 +18,7 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public Optional<Course> getByStatus(StatusEnum status) {
+    public Optional<List<Course>> getByStatus(StatusEnum status) {
         return courseRepository.findByStatus(status);
     }
 }

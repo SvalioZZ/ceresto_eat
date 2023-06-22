@@ -28,5 +28,5 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> getFromType (@Param("type") String type);
     
     Optional<Course> getByName(String name);
-    Optional<Course> findByStatus(StatusEnum status);
+    Optional<List<Course>> findByStatus(StatusEnum status);
 }
