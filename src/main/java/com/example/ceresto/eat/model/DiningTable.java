@@ -30,12 +30,11 @@ public class DiningTable extends AuditableEntity {
     
 
     public DiningTable(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
-                       Long id, Integer tableAvailability, String description, List<Orders> orders) {
+                       Long id, Integer tableAvailability, String description) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.tableAvailability = tableAvailability;
         this.description = description;
-        this.orders = orders;
     }
 
     public DiningTable() {
