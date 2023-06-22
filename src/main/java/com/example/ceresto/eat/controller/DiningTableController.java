@@ -36,7 +36,7 @@ public class DiningTableController {
     }
 
     @GetMapping ("/get-active-records")
-    public Optional<DiningTable> getActiveRecords(){
+    public Optional<List<DiningTable>> getActiveRecords(){
         return diningTableService.getByStatus(StatusEnum.ACTIVE);
     }
 
@@ -66,11 +66,6 @@ public class DiningTableController {
         diningTableRepository.updateStatusById(tableToSet.getStatus(), id);
 
         return ResponseEntity.ok("Table with id " + id + "status changed to " + tableToSet.getStatus());
-    }
-    
-    @GetMapping("/get-by-name/{name}")
-    public List<Course> getByName(@PathVariable("name") String name) {
-        return diningTableRepository.getFromName(name);
     }
 
 }

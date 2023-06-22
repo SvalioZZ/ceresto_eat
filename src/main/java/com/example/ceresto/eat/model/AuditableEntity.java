@@ -45,10 +45,7 @@ public class AuditableEntity {
 
     public AuditableEntity() {
     }
-    
-    public AuditableEntity(StatusEnum status) {
-        this.status = status;
-    }
+
     
     public StatusEnum getStatus() {
         return status;
