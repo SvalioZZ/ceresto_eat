@@ -15,13 +15,13 @@ import java.util.Optional;
 
 @Repository
 public interface DiningTableRepository extends JpaRepository<DiningTable, Long> {
-    @Transactional
+
     @Modifying(flushAutomatically = true)
-    @Query(value = "update dining_table SET audit = :audit WHERE id = :id", nativeQuery = true)
-    void updateStatusById(@Param(value = "audit") StatusEnum audit, @Param(value = "id") Long id);
+    @Query(value = "update dining_table SET status = :status WHERE id = :id", nativeQuery = true)
+    void updateStatusById(@Param(value = "status") StatusEnum status, @Param(value = "id") Long id);
     
     @Query(value = "SELECT * FROM dining_table WHERE name = :name", nativeQuery = true)
     List<Course> getFromName (@Param("name") String name);
 
-    Optional<DiningTable> findByStatus(StatusEnum status);
+    Optional<List<DiningTable>> findByStatus(StatusEnum status);
 }

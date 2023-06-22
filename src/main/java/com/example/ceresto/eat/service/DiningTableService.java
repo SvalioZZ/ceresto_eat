@@ -7,6 +7,7 @@ import com.example.ceresto.eat.repository.DiningTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +20,7 @@ public class DiningTableService {
         this.diningTableRepository = diningTableRepository;
     }
 
-    public Optional<DiningTable> getByStatus(StatusEnum status) {
+    public Optional<List<DiningTable>> getByStatus(StatusEnum status) {
         return diningTableRepository.findByStatus(status);
     }
 
