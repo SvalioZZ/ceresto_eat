@@ -43,8 +43,8 @@ public class CourseController {
     }
 
     @GetMapping("/get-by-type/{type}")
-    public List<Course> getByType(@PathVariable("type") String type){
-        return courseRepository.getFromType(type);
+    public ResponseEntity<List<Course>> getByType(@PathVariable("type") String type){
+        return new ResponseEntity<>(courseRepository.getFromType(type), HttpStatus.OK);
     }
 
     @GetMapping ("/get-active-records")
