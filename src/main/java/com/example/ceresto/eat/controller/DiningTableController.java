@@ -1,7 +1,6 @@
 package com.example.ceresto.eat.controller;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.DiningTable;
 import com.example.ceresto.eat.repository.DiningTableRepository;
 import com.example.ceresto.eat.service.DiningTableService;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +21,13 @@ public class DiningTableController {
     private DiningTableService diningTableService;
 
     @PostMapping("/create")
-    public void create(@RequestBody DiningTable table) {
+    public ResponseEntity<String> create(@RequestBody DiningTable table, @RequestParam String username) {
+        table.setCreatedBy(username);
+        table.setCreatedDate(LocalDate.now());
+        table.setLastModifiedBy(username);
+        table.setLastModifiedDate(LocalDate.now());
         diningTableRepository.saveAndFlush(table);
+        return ResponseEntity.ok("Table created successfully");
     }
 
     @GetMapping("/get-all")
@@ -41,10 +46,12 @@ public class DiningTableController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateById(@PathVariable Long id, @RequestBody DiningTable table){
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody DiningTable table, @RequestParam String username){
         diningTableRepository.deleteById(id);
+        table.setLastModifiedBy(username);
+        table.setLastModifiedDate(LocalDate.now());
         diningTableRepository.save(table);
-        return "Table updated";
+        return ResponseEntity.ok("Table with id " + id + " updated successfully");
     }
 
     @DeleteMapping("delete/{id}")

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,13 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping("/create")
-    public void createCourse(@RequestBody Course course) {
+    public ResponseEntity<String> createCourse(@RequestBody Course course, @RequestParam String username) {
+        course.setCreatedBy(username);
+        course.setCreatedDate(LocalDate.now());
+        course.setLastModifiedBy(username);
+        course.setLastModifiedDate(LocalDate.now());
         courseRepository.saveAndFlush(course);
+        return ResponseEntity.ok("Course created successfully");
     }
 
     @GetMapping("/get-all")
@@ -55,10 +62,12 @@ public class CourseController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Course course) {
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Course course, @RequestParam String username) {
         courseRepository.deleteById(id);
+        course.setLastModifiedBy(username);
+        course.setLastModifiedDate(LocalDate.now());
         courseRepository.save(course);
-        return new ResponseEntity<>("Course with id " + id + ":\n" + course.getInfo(), HttpStatusCode.valueOf(200));
+        return ResponseEntity.ok("Course with id " + id + " updated successfully");
     }
 
     @DeleteMapping("/delete/{id}")

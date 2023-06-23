@@ -13,14 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-//TODO dobbiamo prelevare solo gli oggetti che hanno active come recordStatus
-
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update course SET audit = :audit WHERE id = :id", nativeQuery = true)
-    void updateStatusById(@Param(value = "audit") StatusEnum audit, @Param(value = "id") Long id);
+    @Query(value = "update course SET status = :status WHERE id = :id", nativeQuery = true)
+    void updateStatusById(@Param(value = "status") StatusEnum Status, @Param(value = "id") Long id);
     
     @Query(value = "SELECT * FROM course WHERE name = :name", nativeQuery = true)
     List<Course> getFromName (@Param("name") String name);

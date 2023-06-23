@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,13 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/create")
-    public void create(@RequestBody Customer customer) {
+    public ResponseEntity<String> createCustomer(@RequestBody Customer customer, @RequestParam String username) {
+        customer.setCreatedBy(username);
+        customer.setCreatedDate(LocalDate.now());
+        customer.setLastModifiedBy(username);
+        customer.setLastModifiedDate(LocalDate.now());
         customerRepository.saveAndFlush(customer);
+        return ResponseEntity.ok("Customer created successfully");
     }
 
     @GetMapping("/get-all")
@@ -42,10 +48,12 @@ public class CustomerController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateById(@PathVariable Long id, @RequestBody Customer customer){
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Customer customer, @RequestParam String username){
         customerRepository.deleteById(id);
+        customer.setLastModifiedBy(username);
+        customer.setLastModifiedDate(LocalDate.now());
         customerRepository.save(customer);
-        return "Customer updated";
+        return ResponseEntity.ok("Customer with id "+ id + " updated successfully");
     }
 
     @DeleteMapping("delete/{id}")

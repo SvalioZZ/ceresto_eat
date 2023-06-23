@@ -16,6 +16,7 @@ import java.util.Optional;
 @Repository
 public interface DiningTableRepository extends JpaRepository<DiningTable, Long> {
 
+    @Transactional
     @Modifying(flushAutomatically = true)
     @Query(value = "update dining_table SET status = :status WHERE id = :id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") StatusEnum status, @Param(value = "id") Long id);

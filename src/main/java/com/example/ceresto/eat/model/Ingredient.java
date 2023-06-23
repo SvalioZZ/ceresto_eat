@@ -5,10 +5,10 @@ import com.example.ceresto.eat.enumerati.IngredientTypeEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "ingredient")
 public class Ingredient extends AuditableEntity{
     
     @Id
@@ -25,13 +25,14 @@ public class Ingredient extends AuditableEntity{
     private Double price;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private IngredientTypeEnum type;
     
     @JsonBackReference
     @ManyToOne
     private Course course;
 
-    public Ingredient(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public Ingredient(StatusEnum status, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;

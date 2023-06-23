@@ -3,6 +3,7 @@ package com.example.ceresto.eat.model;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Orders extends AuditableEntity {
 
 
     public Orders(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses,
-                  Date date,String createdBy,Date createdDate,String lastModifiedBy,Date lastModifiedDate ) {
+                  Date date, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.diningTable = diningTable;

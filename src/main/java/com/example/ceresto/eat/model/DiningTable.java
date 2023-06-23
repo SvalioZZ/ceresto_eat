@@ -4,7 +4,7 @@ import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -29,7 +29,7 @@ public class DiningTable extends AuditableEntity {
     private Customer customer;
     
 
-    public DiningTable(StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate,
+    public DiningTable(StatusEnum status, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate,
                        Long id, Integer tableAvailability, String description) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;

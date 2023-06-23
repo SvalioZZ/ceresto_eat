@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Orders, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update order SET audit = :audit WHERE id = :id", nativeQuery = true)
-    void updateStatusById(@Param(value = "audit") StatusEnum audit, @Param(value = "id") Long id);
+    @Query(value = "update order SET status = :status WHERE id = :id", nativeQuery = true)
+    void updateStatusById(@Param(value = "status") StatusEnum status, @Param(value = "id") Long id);
     
     Optional<Orders> findByStatus(StatusEnum status);
 }

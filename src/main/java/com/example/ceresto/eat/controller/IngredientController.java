@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,13 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     @PostMapping("/create")
-    public void create(@RequestBody Ingredient ingredient) {
+    public ResponseEntity<String> create(@RequestBody Ingredient ingredient, @RequestParam String username) {
+        ingredient.setCreatedBy(username);
+        ingredient.setCreatedDate(LocalDate.now());
+        ingredient.setLastModifiedBy(username);
+        ingredient.setLastModifiedDate(LocalDate.now());
         ingredientRepository.saveAndFlush(ingredient);
+        return ResponseEntity.ok("Ingredient created successfully");
     }
 
     @GetMapping("/get-all")
@@ -46,10 +52,12 @@ public class IngredientController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateById(@PathVariable Long id, @RequestBody Ingredient ingredient){
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Ingredient ingredient, @RequestParam String username){
         ingredientRepository.deleteById(id);
+        ingredient.setLastModifiedBy(username);
+        ingredient.setLastModifiedDate(LocalDate.now());
         ingredientRepository.save(ingredient);
-        return "Ingredient updated";
+        return ResponseEntity.ok("Ingredient with id " + id + " updated successfully");
     }
 
     @DeleteMapping("delete/{id}")

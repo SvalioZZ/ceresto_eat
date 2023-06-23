@@ -15,8 +15,8 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update customer SET audit = :audit WHERE id = :id", nativeQuery = true)
-    void updateStatusById(@Param(value = "audit") StatusEnum audit, @Param(value = "id") Long id);
+    @Query(value = "update customer SET status = :status WHERE id = :id", nativeQuery = true)
+    void updateStatusById(@Param(value = "status") StatusEnum status, @Param(value = "id") Long id);
     
     @Query(value = "SELECT * FROM customer WHERE name = :name", nativeQuery = true)
     Optional<Customer> getFromName (@Param("name") String name);

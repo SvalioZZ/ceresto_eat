@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +18,13 @@ public class OrderController {
     private OrderRepository orderRepository;
 
     @PostMapping("/create")
-    public void create(@RequestBody Orders order) {
+    public ResponseEntity<String> create(@RequestBody Orders order, @RequestParam String username) {
+        order.setCreatedBy(username);
+        order.setCreatedDate(LocalDate.now());
+        order.setLastModifiedBy(username);
+        order.setLastModifiedDate(LocalDate.now());
         orderRepository.saveAndFlush(order);
+        return ResponseEntity.ok("Order created successfully");
     }
 
     @GetMapping("/get-all")
@@ -32,10 +38,12 @@ public class OrderController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateById(@PathVariable Long id, @RequestBody Orders order){
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Orders order, @RequestParam String username){
         orderRepository.deleteById(id);
+        order.setLastModifiedBy(username);
+        order.setLastModifiedDate(LocalDate.now());
         orderRepository.save(order);
-        return "Orders updated";
+        return ResponseEntity.ok("Orders with id " + id + " updated successfully");
     }
 
     @DeleteMapping("delete/{id}")

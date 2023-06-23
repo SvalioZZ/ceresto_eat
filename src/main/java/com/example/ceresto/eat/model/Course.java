@@ -4,11 +4,9 @@ import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
-import org.springframework.beans.factory.config.SingletonBeanRegistry;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -42,7 +40,7 @@ public class Course extends AuditableEntity {
 
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
-                  StatusEnum status, String createdBy, Date createdDate, String lastModifiedBy, Date lastModifiedDate) {
+                  StatusEnum status, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
@@ -103,8 +101,8 @@ public class Course extends AuditableEntity {
         this.type = type;
     }
 
-    public String getInfo() {
-       return id + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
-    }
+//    public String getInfo() {
+//       return id + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
+//    }
 
 }
