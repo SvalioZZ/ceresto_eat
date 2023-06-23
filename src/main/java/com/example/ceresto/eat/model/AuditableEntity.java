@@ -33,7 +33,7 @@ public class AuditableEntity {
 
     
     @LastModifiedDate
-    @Temporal(TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate lastModifiedDate;
 
     public AuditableEntity(StatusEnum status, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate) {

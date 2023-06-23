@@ -14,7 +14,8 @@ public class Orders extends AuditableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDate date;
 
     @ManyToOne(targetEntity = DiningTable.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private DiningTable diningTable;
@@ -24,7 +25,7 @@ public class Orders extends AuditableEntity {
 
 
     public Orders(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses,
-                  Date date, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate) {
+                  LocalDate date, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.diningTable = diningTable;
@@ -59,11 +60,11 @@ public class Orders extends AuditableEntity {
         this.courses = courses;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
