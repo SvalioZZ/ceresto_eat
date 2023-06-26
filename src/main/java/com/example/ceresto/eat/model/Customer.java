@@ -4,6 +4,7 @@ import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -39,9 +40,9 @@ public class Customer extends AuditableEntity {
     @Column(nullable = false)
     private Long creditCardNumber;
 
-    @OneToOne
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "dining_table_id")
-    private DiningTable diningTable;
+    private List<DiningTable> diningTable;
 
     public Customer(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                     Long id, String name, String surname, Integer age, String password, String address, String email,

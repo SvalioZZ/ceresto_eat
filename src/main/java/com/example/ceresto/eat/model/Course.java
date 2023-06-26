@@ -31,7 +31,9 @@ public class Course extends AuditableEntity {
     private CourseTypeEnum type;
 
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "course_ingredients", joinColumns = @JoinColumn(name = "ingredient_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Ingredient> ingredients;
     
     @JsonBackReference

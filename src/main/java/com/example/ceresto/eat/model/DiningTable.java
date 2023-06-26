@@ -24,10 +24,14 @@ public class DiningTable extends AuditableEntity {
     
     @JsonBackReference
     @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "order", joinColumns = @JoinColumn(name = "dining-table-id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
     private List<Orders> orders;
 
-    @OneToOne(mappedBy = "diningTable")
-    private Customer customer;
+    @OneToMany(mappedBy = "diningTable")
+    @JoinTable(name = "booking", joinColumns = @JoinColumn(name = "dining-table-id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id"))
+    private List<Customer> customers;
 
     public DiningTable(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Boolean reserved, Integer seats) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
@@ -71,11 +75,11 @@ public class DiningTable extends AuditableEntity {
         this.orders = orders;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public List<Customer> getCustomer() {
+        return customers;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(List<Customer> customers) {
+        this.customers = customers;
     }
 }

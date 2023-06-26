@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "ingredient")
@@ -29,8 +30,8 @@ public class Ingredient extends AuditableEntity{
     private IngredientTypeEnum type;
     
     @JsonBackReference
-    @ManyToOne
-    private Course course;
+    @ManyToMany(mappedBy = "ingredients")
+    private List<Course> courses;
 
     public Ingredient(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type) {
@@ -78,12 +79,12 @@ public class Ingredient extends AuditableEntity{
         this.price = price;
     }
 
-    public Course getCourse() {
-        return course;
+    public List<Course> getCourse() {
+        return courses;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(List<Course> courses) {
+        this.courses = courses;
     }
 
     public IngredientTypeEnum getType() {

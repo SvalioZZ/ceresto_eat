@@ -21,6 +21,7 @@ public class Orders extends AuditableEntity {
     private DiningTable diningTable;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "course")
     private List<Course> courses;
 
 
