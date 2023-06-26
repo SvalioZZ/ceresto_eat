@@ -40,10 +40,13 @@ public class Customer extends AuditableEntity {
     @Column(nullable = false)
     private Long creditCardNumber;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "booking", joinColumns = @JoinColumn(name = "dining_table_id"),
-            inverseJoinColumns = @JoinColumn(name = "customer_id"))
-    private List<DiningTable> diningTables;
+    @OneToMany (mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Booking> bookings;
+
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinTable(name = "booking", joinColumns = @JoinColumn(name = "dining_table_id"),
+//            inverseJoinColumns = @JoinColumn(name = "customer_id"))
+//    private List<DiningTable> diningTables;
     
     public Customer(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                     Long id, String name, String surname, Integer age, String password, String address, String email,

@@ -29,9 +29,9 @@ public class Ingredient extends AuditableEntity{
     @Enumerated(EnumType.STRING)
     private IngredientTypeEnum type;
     
-    @JsonBackReference
-    @ManyToMany(mappedBy = "ingredients")
-    private List<Course> courses;
+//    @JsonBackReference
+//    @ManyToMany(mappedBy = "ingredients")
+//    private List<Course> courses;
 
     public Ingredient(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type) {
@@ -79,13 +79,13 @@ public class Ingredient extends AuditableEntity{
         this.price = price;
     }
 
-    public List<Course> getCourse() {
-        return courses;
-    }
-
-    public void setCourse(List<Course> courses) {
-        this.courses = courses;
-    }
+//    public List<Course> getCourse() {
+//        return courses;
+//    }
+//
+//    public void setCourse(List<Course> courses) {
+//        this.courses = courses;
+//    }
 
     public IngredientTypeEnum getType() {
         return type;
