@@ -16,15 +16,14 @@ public class Orders extends AuditableEntity {
     private Long id;
     @Column(nullable = false)
     private LocalDateTime date;
-
+    
     @ManyToOne(targetEntity = DiningTable.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private DiningTable diningTable;
-
+    
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "course")
     private List<Course> courses;
-
-
+    
+    
     public Orders(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses,
                   LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
@@ -33,38 +32,38 @@ public class Orders extends AuditableEntity {
         this.courses = courses;
         this.date = date;
     }
-
+    
     public Orders() {
     }
-
+    
     public Long getId() {
         return id;
     }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public DiningTable getDiningTable() {
         return diningTable;
     }
-
+    
     public void setDiningTable(DiningTable diningTable) {
         this.diningTable = diningTable;
     }
-
+    
     public List<Course> getCourse() {
         return courses;
     }
-
+    
     public void setCourse(List<Course> courses) {
         this.courses = courses;
     }
-
+    
     public LocalDateTime getDate() {
         return date;
     }
-
+    
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
