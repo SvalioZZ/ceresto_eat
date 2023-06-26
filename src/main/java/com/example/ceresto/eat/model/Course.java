@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "course")
@@ -31,14 +29,14 @@ public class Course extends AuditableEntity {
     private CourseTypeEnum type;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "dettaglio_piatto", joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private List<Ingredient> ingredients;
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinTable(name = "dettaglio_piatto", joinColumns = @JoinColumn(name = "course_id"),
+//            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+//    private List<Ingredient> ingredients;
     
     @JsonBackReference
     @ManyToOne
-    private Orders orders;
+    private Order orders;
 
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
@@ -49,7 +47,7 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
-        this.ingredients = new ArrayList<>();
+//        this.ingredients = new ArrayList<>();
     }
 
     public Course() {
@@ -79,13 +77,13 @@ public class Course extends AuditableEntity {
         this.price = price;
     }
     
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-    
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
+//    public List<Ingredient> getIngredients() {
+//        return ingredients;
+//    }
+//
+//    public void setIngredients(List<Ingredient> ingredients) {
+//        this.ingredients = ingredients;
+//    }
     
     public String getDescription() {
         return description;

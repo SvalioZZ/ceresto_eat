@@ -1,7 +1,7 @@
 package com.example.ceresto.eat.component;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.example.ceresto.eat.model.Orders;
+import com.example.ceresto.eat.model.Order;
 import com.example.ceresto.eat.repository.OrderRepository;
 import com.example.ceresto.eat.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class OrderRepositoryComponent extends OrderService {
     }
     
     @Override
-    public Optional<Orders> getOrderById(StatusEnum status) {
+    public Optional<Order> getOrderById(StatusEnum status) {
         return super.getOrderById(status);
     }
 }
