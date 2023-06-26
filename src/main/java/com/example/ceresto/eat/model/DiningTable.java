@@ -23,11 +23,8 @@ public class DiningTable extends AuditableEntity {
     private Integer seats;
     
     @JsonBackReference
-    @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Orders> orders;
-    
-    @OneToOne(mappedBy = "diningTable")
-    private Customer customer;
+    @ManyToMany(mappedBy = "diningTables")
+    List<Customer> customers;
     
     public DiningTable(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Boolean reserved, Integer seats) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
@@ -61,21 +58,5 @@ public class DiningTable extends AuditableEntity {
     
     public void setSeats(Integer seats) {
         this.seats = seats;
-    }
-    
-    public List<Orders> getOrders() {
-        return orders;
-    }
-    
-    public void setOrders(List<Orders> orders) {
-        this.orders = orders;
-    }
-    
-    public Customer getCustomer() {
-        return customer;
-    }
-    
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 }
