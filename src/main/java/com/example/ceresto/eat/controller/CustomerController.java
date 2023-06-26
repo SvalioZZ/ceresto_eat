@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +25,9 @@ public class CustomerController {
     @PostMapping("/create")
     public ResponseEntity<String> createCustomer(@RequestBody Customer customer, @RequestParam String username) {
         customer.setCreatedBy(username);
-        customer.setCreatedDate(LocalDate.now());
+        customer.setCreatedDate(LocalDateTime.now());
         customer.setLastModifiedBy(username);
-        customer.setLastModifiedDate(LocalDate.now());
+        customer.setLastModifiedDate(LocalDateTime.now());
         customerRepository.saveAndFlush(customer);
         return ResponseEntity.ok("Customer created successfully");
     }
@@ -51,7 +51,7 @@ public class CustomerController {
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Customer customer, @RequestParam String username){
         customerRepository.deleteById(id);
         customer.setLastModifiedBy(username);
-        customer.setLastModifiedDate(LocalDate.now());
+        customer.setLastModifiedDate(LocalDateTime.now());
         customerRepository.save(customer);
         return ResponseEntity.ok("Customer with id "+ id + " updated successfully");
     }

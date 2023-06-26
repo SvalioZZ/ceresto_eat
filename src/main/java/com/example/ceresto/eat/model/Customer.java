@@ -3,7 +3,7 @@ package com.example.ceresto.eat.model;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "customer")
@@ -43,7 +43,7 @@ public class Customer extends AuditableEntity {
     @JoinColumn(name = "dining_table_id")
     private DiningTable diningTable;
 
-    public Customer(StatusEnum status, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate,
+    public Customer(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                     Long id, String name, String surname, Integer age, String password, String address, String email,
                     String diet, String phoneNumber, Long creditCardNumber) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);

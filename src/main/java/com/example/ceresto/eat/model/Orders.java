@@ -3,9 +3,10 @@ package com.example.ceresto.eat.model;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Entity
 @Table(name = "orders")
@@ -14,8 +15,7 @@ public class Orders extends AuditableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ManyToOne(targetEntity = DiningTable.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private DiningTable diningTable;
@@ -25,7 +25,7 @@ public class Orders extends AuditableEntity {
 
 
     public Orders(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses,
-                  LocalDate date, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate) {
+                  LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.diningTable = diningTable;
@@ -60,11 +60,11 @@ public class Orders extends AuditableEntity {
         this.courses = courses;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

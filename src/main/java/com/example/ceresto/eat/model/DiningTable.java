@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -16,10 +17,10 @@ public class DiningTable extends AuditableEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Integer tableAvailability;
+    private Boolean reserved;
 
     @Column(nullable = false)
-    private String description;
+    private Integer seats;
     
     @JsonBackReference
     @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -27,14 +28,12 @@ public class DiningTable extends AuditableEntity {
 
     @OneToOne(mappedBy = "diningTable")
     private Customer customer;
-    
 
-    public DiningTable(StatusEnum status, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate,
-                       Long id, Integer tableAvailability, String description) {
+    public DiningTable(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Boolean reserved, Integer seats) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
-        this.tableAvailability = tableAvailability;
-        this.description = description;
+        this.reserved = reserved;
+        this.seats = seats;
     }
 
     public DiningTable() {
@@ -48,19 +47,35 @@ public class DiningTable extends AuditableEntity {
         this.id = id;
     }
 
-    public Integer getTableAvailability() {
-        return tableAvailability;
+    public Boolean getReserved() {
+        return reserved;
     }
 
-    public void setTableAvailability(Integer tableAvailability) {
-        this.tableAvailability = tableAvailability;
+    public void setReserved(Boolean reserved) {
+        this.reserved = reserved;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getSeats() {
+        return seats;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSeats(Integer seats) {
+        this.seats = seats;
+    }
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,9 +23,9 @@ public class DiningTableController {
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody DiningTable table, @RequestParam String username) {
         table.setCreatedBy(username);
-        table.setCreatedDate(LocalDate.now());
+        table.setCreatedDate(LocalDateTime.now());
         table.setLastModifiedBy(username);
-        table.setLastModifiedDate(LocalDate.now());
+        table.setLastModifiedDate(LocalDateTime.now());
         diningTableRepository.saveAndFlush(table);
         return ResponseEntity.ok("Table created successfully");
     }
@@ -49,7 +49,7 @@ public class DiningTableController {
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody DiningTable table, @RequestParam String username){
         diningTableRepository.deleteById(id);
         table.setLastModifiedBy(username);
-        table.setLastModifiedDate(LocalDate.now());
+        table.setLastModifiedDate(LocalDateTime.now());
         diningTableRepository.save(table);
         return ResponseEntity.ok("Table with id " + id + " updated successfully");
     }

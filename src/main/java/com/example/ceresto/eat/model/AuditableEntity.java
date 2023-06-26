@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static jakarta.persistence.TemporalType.TIMESTAMP;
@@ -24,8 +25,7 @@ public class AuditableEntity {
     private String createdBy;
     
     @CreatedDate
-    @Temporal(TIMESTAMP)
-    public LocalDate createdDate;
+    public LocalDateTime createdDate;
 
     
     @LastModifiedBy
@@ -33,10 +33,9 @@ public class AuditableEntity {
 
     
     @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate lastModifiedDate;
+    private LocalDateTime lastModifiedDate;
 
-    public AuditableEntity(StatusEnum status, String createdBy, LocalDate createdDate, String lastModifiedBy, LocalDate lastModifiedDate) {
+    public AuditableEntity(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         this.status = status;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
@@ -65,11 +64,11 @@ public class AuditableEntity {
         this.createdBy = createdBy;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -81,11 +80,11 @@ public class AuditableEntity {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public LocalDate getLastModifiedDate() {
+    public LocalDateTime getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(LocalDate lastModifiedDate) {
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 }

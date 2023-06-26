@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +27,9 @@ public class CourseController {
     @PostMapping("/create")
     public ResponseEntity<String> createCourse(@RequestBody Course course, @RequestParam String username) {
         course.setCreatedBy(username);
-        course.setCreatedDate(LocalDate.now());
+        course.setCreatedDate(LocalDateTime.now());
         course.setLastModifiedBy(username);
-        course.setLastModifiedDate(LocalDate.now());
+        course.setLastModifiedDate(LocalDateTime.now());
         courseRepository.saveAndFlush(course);
         return ResponseEntity.ok("Course created successfully");
     }
@@ -65,7 +65,7 @@ public class CourseController {
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Course course, @RequestParam String username) {
         courseRepository.deleteById(id);
         course.setLastModifiedBy(username);
-        course.setLastModifiedDate(LocalDate.now());
+        course.setLastModifiedDate(LocalDateTime.now());
         courseRepository.save(course);
         return ResponseEntity.ok("Course with id " + id + " updated successfully");
     }

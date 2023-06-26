@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +20,9 @@ public class OrderController {
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody Orders order, @RequestParam String username) {
         order.setCreatedBy(username);
-        order.setCreatedDate(LocalDate.now());
+        order.setCreatedDate(LocalDateTime.now());
         order.setLastModifiedBy(username);
-        order.setLastModifiedDate(LocalDate.now());
+        order.setLastModifiedDate(LocalDateTime.now());
         orderRepository.saveAndFlush(order);
         return ResponseEntity.ok("Order created successfully");
     }
@@ -41,7 +41,7 @@ public class OrderController {
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Orders order, @RequestParam String username){
         orderRepository.deleteById(id);
         order.setLastModifiedBy(username);
-        order.setLastModifiedDate(LocalDate.now());
+        order.setLastModifiedDate(LocalDateTime.now());
         orderRepository.save(order);
         return ResponseEntity.ok("Orders with id " + id + " updated successfully");
     }
