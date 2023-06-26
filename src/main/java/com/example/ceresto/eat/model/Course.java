@@ -32,8 +32,8 @@ public class Course extends AuditableEntity {
 
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "course_ingredients", joinColumns = @JoinColumn(name = "ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @JoinTable(name = "dettaglio_piatto", joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
     
     @JsonBackReference
