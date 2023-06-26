@@ -1,7 +1,7 @@
 package com.example.ceresto.eat.repository;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.example.ceresto.eat.model.Order;
+import com.example.ceresto.eat.model.Comanda;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface ComandaRepository extends JpaRepository<Comanda, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
     @Query(value = "update order SET status = :status WHERE id = :id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") StatusEnum status, @Param(value = "id") Long id);
     
-    Optional<Order> findByStatus(StatusEnum status);
+    Optional<Comanda> findByStatus(StatusEnum status);
 }

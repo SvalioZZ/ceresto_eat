@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "Booking")
+@Table (name = "booking")
 public class Booking extends AuditableEntity{
 
     @Id

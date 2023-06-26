@@ -36,7 +36,7 @@ public class Course extends AuditableEntity {
     
     @JsonBackReference
     @ManyToOne
-    private Order orders;
+    private Comanda comande;
 
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,

@@ -1,8 +1,8 @@
 package com.example.ceresto.eat.controller;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.example.ceresto.eat.model.Order;
-import com.example.ceresto.eat.repository.OrderRepository;
+import com.example.ceresto.eat.model.Comanda;
+import com.example.ceresto.eat.repository.ComandaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,10 @@ import java.util.Optional;
 @RequestMapping("/api/orders")
 public class OrderController {
     @Autowired
-    private OrderRepository orderRepository;
+    private ComandaRepository orderRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody Order order, @RequestParam String username) {
+    public ResponseEntity<String> create(@RequestBody Comanda order, @RequestParam String username) {
         order.setCreatedBy(username);
         order.setCreatedDate(LocalDateTime.now());
         order.setLastModifiedBy(username);
@@ -28,17 +28,17 @@ public class OrderController {
     }
 
     @GetMapping("/get-all")
-    public List<Order> getAll() {
+    public List<Comanda> getAll() {
         return orderRepository.findAll();
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Order> getById(@PathVariable Long id) {
+    public Optional<Comanda> getById(@PathVariable Long id) {
         return orderRepository.findById(id);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Order order, @RequestParam String username){
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Comanda order, @RequestParam String username){
         orderRepository.deleteById(id);
         order.setLastModifiedBy(username);
         order.setLastModifiedDate(LocalDateTime.now());
@@ -58,7 +58,7 @@ public class OrderController {
 
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
-        Order orderToSet = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
+        Comanda orderToSet = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
         if (orderToSet.getStatus().equals(StatusEnum.ACTIVE)) {
             orderToSet.setStatus(StatusEnum.DELETED);
         } else orderToSet.setStatus(StatusEnum.ACTIVE);

@@ -9,8 +9,8 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "orders")
-public class Order extends AuditableEntity {
+@Table(name = "comanda")
+public class Comanda extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,12 +20,12 @@ public class Order extends AuditableEntity {
     @ManyToOne(targetEntity = DiningTable.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private DiningTable diningTable;
 
-    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comande", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Course> courses;
     
     
-    public Order(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses,
-                 LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
+    public Comanda(StatusEnum status, Long id, DiningTable diningTable, List<Course> courses,
+                   LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.diningTable = diningTable;
@@ -33,7 +33,7 @@ public class Order extends AuditableEntity {
         this.date = date;
     }
     
-    public Order() {
+    public Comanda() {
     }
     
     public Long getId() {

@@ -1,8 +1,8 @@
 package com.example.ceresto.eat.service;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.example.ceresto.eat.model.Order;
-import com.example.ceresto.eat.repository.OrderRepository;
+import com.example.ceresto.eat.model.Comanda;
+import com.example.ceresto.eat.repository.ComandaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +12,13 @@ import java.util.Optional;
 public class OrderService {
     
     @Autowired
-    private OrderRepository orderRepository;
+    private ComandaRepository orderRepository;
     
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(ComandaRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
     
-    public Optional<Order> getOrderById(StatusEnum status) {
+    public Optional<Comanda> getOrderById(StatusEnum status) {
         return orderRepository.findByStatus(status);
     }
 }
