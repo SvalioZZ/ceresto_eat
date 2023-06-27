@@ -4,6 +4,7 @@ import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,7 +41,7 @@ public class Customer extends AuditableEntity {
     @Column(nullable = false)
     private Long creditCardNumber;
 
-    @OneToMany (mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
     
@@ -58,6 +59,7 @@ public class Customer extends AuditableEntity {
         this.diet = diet;
         this.phoneNumber = phoneNumber;
         this.creditCardNumber = creditCardNumber;
+        this.bookings = new ArrayList<>();
     }
     
     public Customer() {
@@ -141,5 +143,13 @@ public class Customer extends AuditableEntity {
     
     public void setCreditCardNumber(Long creditCardNumber) {
         this.creditCardNumber = creditCardNumber;
+    }
+    
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+    
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

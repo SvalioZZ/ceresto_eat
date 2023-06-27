@@ -25,12 +25,16 @@ public class Booking extends AuditableEntity{
     @JsonBackReference
     @ManyToOne
     private DiningTable diningTable;
-
+    
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comanda> comande;
+    
     public Booking(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Customer customer, DiningTable diningTable) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.customer = customer;
         this.diningTable = diningTable;
+        this.comande = new ArrayList<>();
     }
 
     public Long getId() {
@@ -48,12 +52,20 @@ public class Booking extends AuditableEntity{
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
-    public DiningTable getDiningTables() {
+    
+    public DiningTable getDiningTable() {
         return diningTable;
     }
-
-    public void setDiningTables(DiningTable diningTable) {
+    
+    public void setDiningTable(DiningTable diningTable) {
         this.diningTable = diningTable;
+    }
+    
+    public List<Comanda> getComande() {
+        return comande;
+    }
+    
+    public void setComande(List<Comanda> comande) {
+        this.comande = comande;
     }
 }
