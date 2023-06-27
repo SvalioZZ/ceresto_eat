@@ -34,9 +34,10 @@ public class Course extends AuditableEntity {
 //            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
 //    private List<Ingredient> ingredients;
     
+
     @JsonBackReference
     @ManyToOne
-    private Comanda comande;
+    private DettaglioComanda dettaglioComanda;
 
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,

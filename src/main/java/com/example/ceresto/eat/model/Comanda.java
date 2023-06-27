@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,12 +22,18 @@ public class Comanda extends AuditableEntity {
     @JsonBackReference
     @ManyToOne
     private Booking booking;
+
+
+    @JsonBackReference
+    @OneToMany (mappedBy = "comanda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DettaglioComanda> dettaglioComande;
     
     
     public Comanda(StatusEnum status, Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.date = date;
+        this.dettaglioComande = new ArrayList<>();
     }
     
     public Comanda() {

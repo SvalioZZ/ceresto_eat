@@ -37,6 +37,9 @@ public class Booking extends AuditableEntity{
         this.comande = new ArrayList<>();
     }
 
+    public Booking () {
+
+    }
     public Long getId() {
         return id;
     }
