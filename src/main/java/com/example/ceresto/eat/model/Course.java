@@ -29,9 +29,7 @@ public class Course extends AuditableEntity {
     @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
 
-    @JsonBackReference
-    @ManyToOne
-    private Comanda comande;
+
 
     @JsonBackReference
     @OneToOne
@@ -78,15 +76,7 @@ public class Course extends AuditableEntity {
     public void setPrice(Double price) {
         this.price = price;
     }
-    
-//    public List<Ingredient> getIngredients() {
-//        return ingredients;
-//    }
-//
-//    public void setIngredients(List<Ingredient> ingredients) {
-//        this.ingredients = ingredients;
-//    }
-    
+
     public String getDescription() {
         return description;
     }
