@@ -18,17 +18,9 @@ public class DettaglioComanda extends AuditableEntity{
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany (mappedBy = "dettaglio_comanda" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Course> courses;
-
-    @JsonBackReference
-    @ManyToOne
-    private Comanda comanda;
-
-    public DettaglioComanda(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, List<Course> courses) {
+    public DettaglioComanda(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
-        this.courses = new ArrayList<>();
     }
 
     public DettaglioComanda () {}
@@ -40,12 +32,5 @@ public class DettaglioComanda extends AuditableEntity{
     public void setId(Long id) {
         this.id = id;
     }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
+    
 }

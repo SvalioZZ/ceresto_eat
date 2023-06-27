@@ -27,17 +27,8 @@ public class Course extends AuditableEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
-
-
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(name = "dettaglio_piatto", joinColumns = @JoinColumn(name = "course_id"),
-//            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-//    private List<Ingredient> ingredients;
     
-
-    @JsonBackReference
-    @ManyToOne
-    private DettaglioComanda dettaglioComanda;
+    
 
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
@@ -48,7 +39,6 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
-//        this.ingredients = new ArrayList<>();
     }
 
     public Course() {
@@ -77,14 +67,6 @@ public class Course extends AuditableEntity {
     public void setPrice(Double price) {
         this.price = price;
     }
-    
-//    public List<Ingredient> getIngredients() {
-//        return ingredients;
-//    }
-//
-//    public void setIngredients(List<Ingredient> ingredients) {
-//        this.ingredients = ingredients;
-//    }
     
     public String getDescription() {
         return description;
