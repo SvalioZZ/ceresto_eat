@@ -4,9 +4,7 @@ import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.enumerati.IngredientTypeEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "ingredient")
@@ -28,10 +26,9 @@ public class Ingredient extends AuditableEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private IngredientTypeEnum type;
-    
-//    @JsonBackReference
-//    @ManyToMany(mappedBy = "ingredients")
-//    private List<Course> courses;
+
+    @ManyToOne
+    private CourseDetails courseDetails;
 
     public Ingredient(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type) {

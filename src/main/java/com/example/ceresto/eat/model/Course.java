@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "course")
@@ -28,15 +29,16 @@ public class Course extends AuditableEntity {
     @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
 
-
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinTable(name = "dettaglio_piatto", joinColumns = @JoinColumn(name = "course_id"),
-//            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-//    private List<Ingredient> ingredients;
-    
     @JsonBackReference
     @ManyToOne
     private Comanda comande;
+
+    @JsonBackReference
+    @OneToOne
+    private Course course;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CourseDetails> courseDetails;
 
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
