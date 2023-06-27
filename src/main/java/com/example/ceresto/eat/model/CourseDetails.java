@@ -23,6 +23,9 @@ public class CourseDetails extends AuditableEntity{
     @ManyToOne
     private Course course;
 
+    @OneToMany(mappedBy = "courseDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comanda> comanda;
+
     public CourseDetails(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Ingredient ingredient, Course course) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;

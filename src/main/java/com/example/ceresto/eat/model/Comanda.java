@@ -22,8 +22,11 @@ public class Comanda extends AuditableEntity {
     @JsonBackReference
     @ManyToOne
     private Booking booking;
-    
-    
+
+    @ManyToOne
+    private CourseDetails courseDetails;
+
+
     public Comanda(StatusEnum status, Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;

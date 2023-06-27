@@ -30,10 +30,9 @@ public class Course extends AuditableEntity {
     private CourseTypeEnum type;
 
 
-
-    @JsonBackReference
-    @OneToOne
-    private Course course;
+//    @JsonBackReference
+//    @OneToOne
+//    private Course course;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CourseDetails> courseDetails;
@@ -47,7 +46,6 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
-//        this.ingredients = new ArrayList<>();
     }
 
     public Course() {
