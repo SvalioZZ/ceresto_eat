@@ -23,14 +23,14 @@ public class Booking extends AuditableEntity{
     private Customer customer;
 
     @JsonBackReference
-    @OneToMany (mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DiningTable> diningTables = new ArrayList<>();
+    @ManyToOne
+    private DiningTable diningTable;
 
-    public Booking(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Customer customer, List<DiningTable> diningTables) {
+    public Booking(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Customer customer, DiningTable diningTable) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.customer = customer;
-        this.diningTables = diningTables;
+        this.diningTable = diningTable;
     }
 
     public Long getId() {
@@ -49,11 +49,11 @@ public class Booking extends AuditableEntity{
         this.customer = customer;
     }
 
-    public List<DiningTable> getDiningTables() {
-        return diningTables;
+    public DiningTable getDiningTables() {
+        return diningTable;
     }
 
-    public void setDiningTables(List<DiningTable> diningTables) {
-        this.diningTables = diningTables;
+    public void setDiningTables(DiningTable diningTable) {
+        this.diningTable = diningTable;
     }
 }
