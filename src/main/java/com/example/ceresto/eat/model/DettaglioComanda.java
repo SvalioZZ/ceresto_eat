@@ -17,6 +17,17 @@ public class DettaglioComanda extends AuditableEntity{
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn (name = "comanda_id")
+    private Comanda comanda;
+    
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn (name = "course_id")
+    private Course course;
+    
 
     public DettaglioComanda(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
@@ -33,4 +44,19 @@ public class DettaglioComanda extends AuditableEntity{
         this.id = id;
     }
     
+    public Comanda getComanda() {
+        return comanda;
+    }
+    
+    public void setComanda(Comanda comanda) {
+        this.comanda = comanda;
+    }
+    
+    public Course getCourse() {
+        return course;
+    }
+    
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }

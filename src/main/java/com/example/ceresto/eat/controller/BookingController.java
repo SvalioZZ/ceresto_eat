@@ -49,11 +49,11 @@ public class BookingController {
         return bookingRepo.findById(id);
     }
 
-    @GetMapping("/get-by-diningTable/{diningTable}")
-    public ResponseEntity<List<Booking>> getByType(@PathVariable("diningTable") DiningTable diningTable) {
-        Optional<List<Booking>> bookingList = bookingService.getByType(diningTable);
-        return bookingList.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+//    @GetMapping("/get-by-diningTable/{diningTable}")
+//    public ResponseEntity<List<Booking>> getByType(@PathVariable("diningTable") DiningTable diningTable) {
+//        Optional<List<Booking>> bookingList = bookingService.getByType(diningTable);
+//        return bookingList.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
     @GetMapping ("/get-active-records")
     public Optional<List<Booking>> getActiveRecords(){

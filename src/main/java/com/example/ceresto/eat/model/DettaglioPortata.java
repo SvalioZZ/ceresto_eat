@@ -5,35 +5,32 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table
-public class CourseDetails extends AuditableEntity{
+public class DettaglioPortata extends AuditableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @JsonBackReference
     @ManyToOne
+    @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
     @JsonBackReference
     @ManyToOne
+    @JoinColumn(name = "course_id")
     private Course course;
+    
 
-    @OneToMany(mappedBy = "courseDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Comanda> comanda;
-
-    public CourseDetails(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Ingredient ingredient, Course course) {
+    public DettaglioPortata(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy,
+                            LocalDateTime lastModifiedDate, Long id) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
-        this.ingredient = ingredient;
-        this.course = course;
     }
 
-    public CourseDetails() {
+    public DettaglioPortata() {
     }
 
     public Long getId() {
@@ -59,4 +56,5 @@ public class CourseDetails extends AuditableEntity{
     public void setCourse(Course course) {
         this.course = course;
     }
+    
 }

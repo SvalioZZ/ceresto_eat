@@ -2,9 +2,9 @@ package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.enumerati.IngredientTypeEnum;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +29,7 @@ public class Ingredient extends AuditableEntity{
     private IngredientTypeEnum type;
 
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CourseDetails> courseDetails;
+    private List<DettaglioPortata> dettagliPortata;
 
     public Ingredient(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type) {
@@ -39,6 +39,7 @@ public class Ingredient extends AuditableEntity{
         this.description = description;
         this.price = price;
         this.type = type;
+        this.dettagliPortata = new ArrayList<>();
     }
 
     public Ingredient() {
@@ -77,19 +78,19 @@ public class Ingredient extends AuditableEntity{
         this.price = price;
     }
 
-//    public List<Course> getCourse() {
-//        return courses;
-//    }
-//
-//    public void setCourse(List<Course> courses) {
-//        this.courses = courses;
-//    }
-
     public IngredientTypeEnum getType() {
         return type;
     }
 
     public void setType(IngredientTypeEnum type) {
         this.type = type;
+    }
+    
+    public List<DettaglioPortata> getDettagliPortata() {
+        return dettagliPortata;
+    }
+    
+    public void setDettagliPortata(List<DettaglioPortata> dettagliPortata) {
+        this.dettagliPortata = dettagliPortata;
     }
 }

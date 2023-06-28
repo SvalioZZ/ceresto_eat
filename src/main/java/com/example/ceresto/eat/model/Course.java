@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,15 +29,11 @@ public class Course extends AuditableEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
-
-
-//    @JsonBackReference
-//    @OneToOne
-//    private Course course;
-
+    
+    
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CourseDetails> courseDetails;
-
+    private List<DettaglioComanda> dettagliComande;
+    
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
                   StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
@@ -46,6 +43,7 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
+        this.dettagliComande = new ArrayList<>();
     }
 
     public Course() {

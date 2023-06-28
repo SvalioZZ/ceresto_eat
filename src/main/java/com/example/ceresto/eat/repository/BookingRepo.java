@@ -21,6 +21,6 @@ public interface BookingRepo extends JpaRepository <Booking, Long> {
     @Query(value = "update course_details SET status = :status WHERE id = :id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") StatusEnum Status, @Param(value = "id") Long id);
     Optional<Booking> getByCustomer(Customer customer_id);
-    Optional<List<Booking>> getByType(DiningTable type);
+    //Optional<List<Booking>> getByType(DiningTable type);
     Optional<List<Booking>> getByStatus(StatusEnum status);
 }

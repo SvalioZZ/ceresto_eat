@@ -22,15 +22,17 @@ public class Comanda extends AuditableEntity {
     @JsonBackReference
     @ManyToOne
     private Booking booking;
-
-    @ManyToOne
-    private CourseDetails courseDetails;
+    
+    
+    @OneToMany(mappedBy = "comanda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DettaglioComanda> dettagliComanda;
 
 
     public Comanda(StatusEnum status, Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.date = date;
+        this.dettagliComanda = new ArrayList<>();
     }
     
     public Comanda() {
@@ -58,5 +60,13 @@ public class Comanda extends AuditableEntity {
     
     public void setBooking(Booking booking) {
         this.booking = booking;
+    }
+    
+    public List<DettaglioComanda> getDettagliComanda() {
+        return dettagliComanda;
+    }
+    
+    public void setDettagliComanda(List<DettaglioComanda> dettagliComanda) {
+        this.dettagliComanda = dettagliComanda;
     }
 }
