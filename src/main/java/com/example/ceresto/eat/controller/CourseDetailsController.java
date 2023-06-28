@@ -1,12 +1,10 @@
 package com.example.ceresto.eat.controller;
 
-import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.DettaglioPortata;
 import com.example.ceresto.eat.repository.CourseDetailsRepository;
 import com.example.ceresto.eat.service.CourseDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/courseDetails")
+@RequestMapping("/api/course-details")
 public class CourseDetailsController {
 
     @Autowired
@@ -24,7 +22,7 @@ public class CourseDetailsController {
     @Autowired
     private CourseDetailsService courseDetailsService;
 
-    @PostMapping("/createDetails")
+    @PostMapping("/create")
     public ResponseEntity<String> createCourseDetail (@RequestBody DettaglioPortata dettaglioPortata, @RequestParam String username) {
         dettaglioPortata.setCreatedBy(username);
         dettaglioPortata.setCreatedDate(LocalDateTime.now());

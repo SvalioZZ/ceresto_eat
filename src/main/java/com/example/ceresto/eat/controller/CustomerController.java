@@ -1,7 +1,6 @@
 package com.example.ceresto.eat.controller;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.Customer;
 import com.example.ceresto.eat.repository.CustomerRepository;
 import com.example.ceresto.eat.service.CustomerService;

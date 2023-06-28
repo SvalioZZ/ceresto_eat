@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ComandaRepository extends JpaRepository<Comanda, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update order SET status = :status WHERE id = :id", nativeQuery = true)
+    @Query(value = "update comanda SET status = :status WHERE id = :id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") StatusEnum status, @Param(value = "id") Long id);
     
     Optional<Comanda> findByStatus(StatusEnum status);

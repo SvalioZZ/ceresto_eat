@@ -1,6 +1,5 @@
 package com.example.ceresto.eat.service;
 
-import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.DettaglioPortata;
 import com.example.ceresto.eat.repository.CourseDetailsRepository;

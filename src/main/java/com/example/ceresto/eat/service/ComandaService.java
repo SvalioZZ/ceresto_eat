@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class OrderService {
+public class ComandaService {
     
     @Autowired
-    private ComandaRepository orderRepository;
+    private ComandaRepository comandaRepository;
     
-    public OrderService(ComandaRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public ComandaService(ComandaRepository comandaRepository) {
+        this.comandaRepository = comandaRepository;
     }
     
     public Optional<Comanda> getOrderById(StatusEnum status) {
-        return orderRepository.findByStatus(status);
+        return comandaRepository.findByStatus(status);
     }
 }

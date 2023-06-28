@@ -3,6 +3,7 @@ package com.example.ceresto.eat.controller;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Comanda;
 import com.example.ceresto.eat.repository.ComandaRepository;
+import com.example.ceresto.eat.service.ComandaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/orders")
-public class OrderController {
+@RequestMapping("/api/comanda")
+public class ComandaController {
     @Autowired
-    private ComandaRepository orderRepository;
+    private ComandaRepository comandaRepository;
+
+    @Autowired
+    private ComandaService comandaService;
 
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody Comanda order, @RequestParam String username) {
@@ -23,46 +27,46 @@ public class OrderController {
         order.setCreatedDate(LocalDateTime.now());
         order.setLastModifiedBy(username);
         order.setLastModifiedDate(LocalDateTime.now());
-        orderRepository.saveAndFlush(order);
+        comandaRepository.saveAndFlush(order);
         return ResponseEntity.ok("Order created successfully");
     }
 
     @GetMapping("/get-all")
     public List<Comanda> getAll() {
-        return orderRepository.findAll();
+        return comandaRepository.findAll();
     }
 
     @GetMapping("/get/{id}")
     public Optional<Comanda> getById(@PathVariable Long id) {
-        return orderRepository.findById(id);
+        return comandaRepository.findById(id);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Comanda order, @RequestParam String username){
-        orderRepository.deleteById(id);
+        comandaRepository.deleteById(id);
         order.setLastModifiedBy(username);
         order.setLastModifiedDate(LocalDateTime.now());
-        orderRepository.save(order);
+        comandaRepository.save(order);
         return ResponseEntity.ok("Orders with id " + id + " updated successfully");
     }
 
     @DeleteMapping("delete/{id}")
     public void deleteById(@PathVariable Long id) {
-        orderRepository.deleteById(id);
+        comandaRepository.deleteById(id);
     }
 
     @DeleteMapping("delete-all")
     public void deleteAll() {
-        orderRepository.deleteAll();
+        comandaRepository.deleteAll();
     }
 
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
-        Comanda orderToSet = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
+        Comanda orderToSet = comandaRepository.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
         if (orderToSet.getStatus().equals(StatusEnum.ACTIVE)) {
             orderToSet.setStatus(StatusEnum.DELETED);
         } else orderToSet.setStatus(StatusEnum.ACTIVE);
-        orderRepository.updateStatusById(orderToSet.getStatus(), id);
+        comandaRepository.updateStatusById(orderToSet.getStatus(), id);
 
         return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + orderToSet.getStatus());
     }
