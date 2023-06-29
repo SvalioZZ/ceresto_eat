@@ -18,10 +18,6 @@ public class BookingService {
         this.bookingRepository = bookingRepository;
     }
 
-//    public Optional<List<Booking>> getByType(DiningTable diningTable){
-//        return bookingRepo.getByType(diningTable);
-//    }
-
     public Optional<List<Booking>> getByStatus(StatusEnum status){
         return bookingRepository.getByStatus(status);
     }

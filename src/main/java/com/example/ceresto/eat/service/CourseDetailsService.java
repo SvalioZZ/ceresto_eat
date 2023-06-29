@@ -18,10 +18,6 @@ public class CourseDetailsService {
         this.courseDetailsRepository = courseDetailsRepository;
     }
 
-//    public Optional<List<DettaglioPortata>> getByType(CourseTypeEnum type){
-//        return courseDetailsRepository.getByType(type);
-//    }
-
     public Optional<List<DettaglioPortata>> getByStatus(StatusEnum status){
         return courseDetailsRepository.getByStatus(status);
     }

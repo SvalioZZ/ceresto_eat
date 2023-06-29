@@ -19,8 +19,7 @@ public interface CourseDetailsRepository extends JpaRepository<DettaglioPortata,
     @Modifying(flushAutomatically = true)
     @Query(value = "update course_details SET status = :status WHERE id = :id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") StatusEnum Status, @Param(value = "id") Long id);
-//    Optional<DettaglioPortata> getByName(String name);
-//    Optional<List<DettaglioPortata>> getByType(CourseTypeEnum type);
+
     Optional<List<DettaglioPortata>> getByStatus(StatusEnum status);
 
 }

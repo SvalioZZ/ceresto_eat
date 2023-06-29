@@ -35,23 +35,13 @@ public class BookingController {
     public List<Booking> getAllBooking() {
         return bookingRepository.findAll();
     }
-
-//    @GetMapping("/get-by-customer/{customer}")
-//    public ResponseEntity<Booking> getByCustomer(@PathVariable("customer") Customer customer_id) {
-//        Optional<Booking> booking = bookingRepository.getByCustomer(customer_id);
-//        return booking.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
+    
 
     @GetMapping("/get-by-id/{id}")
     public Optional<Booking> getById(@PathVariable("id") Long id) {
         return bookingRepository.findById(id);
     }
-
-//    @GetMapping("/get-by-diningTable/{diningTable}")
-//    public ResponseEntity<List<Booking>> getByType(@PathVariable("diningTable") DiningTable diningTable) {
-//        Optional<List<Booking>> bookingList = bookingService.getByType(diningTable);
-//        return bookingList.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
+    
 
     @GetMapping ("/get-active-records")
     public Optional<List<Booking>> getActiveRecords(){

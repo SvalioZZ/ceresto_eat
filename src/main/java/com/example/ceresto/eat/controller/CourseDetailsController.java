@@ -36,23 +36,12 @@ public class CourseDetailsController {
     public List<DettaglioPortata> getAllCoursesDetails() {
         return courseDetailsRepository.findAll();
     }
-
-//    @GetMapping("/get-by-name/{name}")
-//    public ResponseEntity<DettaglioPortata> getByName(@PathVariable("name") String name) {
-//        Optional<DettaglioPortata> courseDetails = courseDetailsRepository.getByName(name);
-//        return courseDetails.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
+    
 
     @GetMapping("/get-by-id/{id}")
     public Optional<DettaglioPortata> getById(@PathVariable("id") Long id) {
         return courseDetailsRepository.findById(id);
     }
-
-//    @GetMapping("/get-by-type/{type}")
-//    public ResponseEntity<List<DettaglioPortata>> getByType(@PathVariable("type") CourseTypeEnum type){
-//        Optional<List<DettaglioPortata>> courseDetailsList = courseDetailsService.getByType(type);
-//        return courseDetailsList.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
 
     @GetMapping ("/get-active-records")
     public Optional<List<DettaglioPortata>> getActiveRecords(){
