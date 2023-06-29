@@ -42,11 +42,11 @@ public class BillingDetail extends AuditableEntity{
         this.id = id;
     }
     
-    public Billing getCheck() {
+    public Billing getBilling() {
         return billing;
     }
     
-    public void setCheck(Billing billing) {
+    public void setBilling(Billing billing) {
         this.billing = billing;
     }
     

@@ -29,7 +29,7 @@ public class CourseDetailsController {
         courseDetail.setLastModifiedBy(username);
         courseDetail.setLastModifiedDate(LocalDateTime.now());
         courseDetailsRepository.saveAndFlush(courseDetail);
-        return ResponseEntity.ok("Course Details created successfully");
+        return ResponseEntity.ok("Course Detail created successfully");
     }
 
     @GetMapping("/get-all")
@@ -54,7 +54,7 @@ public class CourseDetailsController {
         courseDetail.setLastModifiedBy(username);
         courseDetail.setLastModifiedDate(LocalDateTime.now());
         courseDetailsRepository.save(courseDetail);
-        return ResponseEntity.ok("Course Details with id " + id + " updated successfully");
+        return ResponseEntity.ok("Course Detail with id " + id + " updated successfully");
     }
 
     @DeleteMapping("/delete/{id}")

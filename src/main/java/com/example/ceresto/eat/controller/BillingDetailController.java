@@ -23,13 +23,13 @@ public class BillingDetailController {
     private BillingDetailService billingDetailService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createCheckDetail(@RequestBody BillingDetail billingDetail, @RequestParam String username) {
+    public ResponseEntity<String> createBillingDetail(@RequestBody BillingDetail billingDetail, @RequestParam String username) {
         billingDetail.setCreatedBy(username);
         billingDetail.setCreatedDate(LocalDateTime.now());
         billingDetail.setLastModifiedBy(username);
         billingDetail.setLastModifiedDate(LocalDateTime.now());
         billingDetailRepo.saveAndFlush(billingDetail);
-        return ResponseEntity.ok("Course Details created successfully");
+        return ResponseEntity.ok("Billing Detail created successfully");
     }
 
     @GetMapping("/get-all")
@@ -53,7 +53,7 @@ public class BillingDetailController {
         billingDetail.setLastModifiedBy(username);
         billingDetail.setLastModifiedDate(LocalDateTime.now());
         billingDetailRepo.save(billingDetail);
-        return ResponseEntity.ok("BillingDetail with id " + id + " updated successfully");
+        return ResponseEntity.ok("Billing Detail with id " + id + " updated successfully");
     }
 
     @DeleteMapping("delete/{id}")
@@ -68,13 +68,13 @@ public class BillingDetailController {
 
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
-        BillingDetail billingDetailToSet = billingDetailRepo.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+        BillingDetail billingDetailToSet = billingDetailRepo.findById(id).orElseThrow(() -> new RuntimeException("BillingDetail not found"));
         if (billingDetailToSet.getStatus().equals(StatusEnum.ACTIVE)) {
             billingDetailToSet.setStatus(StatusEnum.DELETED);
         } else billingDetailToSet.setStatus(StatusEnum.ACTIVE);
         billingDetailRepo.updateStatusById(billingDetailToSet.getStatus(), id);
 
-        return ResponseEntity.ok("BillingDetail with id " + id + "status changed to " + billingDetailToSet.getStatus());
+        return ResponseEntity.ok("Billing Detail with id " + id + "status changed to " + billingDetailToSet.getStatus());
     }
 
 

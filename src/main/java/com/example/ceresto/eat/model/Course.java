@@ -88,11 +88,11 @@ public class Course extends AuditableEntity {
         this.type = type;
     }
     
-    public List<BillingDetail> getCheckDetails() {
+    public List<BillingDetail> getBillingDetails() {
         return billingDetails;
     }
     
-    public void setCheckDetails(List<BillingDetail> billingDetails) {
+    public void setBillingDetails(List<BillingDetail> billingDetails) {
         this.billingDetails = billingDetails;
     }
     

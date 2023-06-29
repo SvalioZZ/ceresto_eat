@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface BillingRepo extends JpaRepository<Billing, Long> {
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update check SET status = :status WHERE id = :id", nativeQuery = true)
+    @Query(value = "update billing SET status = :status WHERE id = :id", nativeQuery = true)
     void updateStatusById(@Param(value = "status") StatusEnum status, @Param(value = "id") Long id);
     
     Optional<Billing> findByStatus(StatusEnum status);

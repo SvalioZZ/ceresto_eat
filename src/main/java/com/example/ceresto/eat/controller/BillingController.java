@@ -22,12 +22,12 @@ public class BillingController {
     private BillingService billingService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody Billing order, @RequestParam String username) {
-        order.setCreatedBy(username);
-        order.setCreatedDate(LocalDateTime.now());
-        order.setLastModifiedBy(username);
-        order.setLastModifiedDate(LocalDateTime.now());
-        billingRepo.saveAndFlush(order);
+    public ResponseEntity<String> create(@RequestBody Billing billing, @RequestParam String username) {
+        billing.setCreatedBy(username);
+        billing.setCreatedDate(LocalDateTime.now());
+        billing.setLastModifiedBy(username);
+        billing.setLastModifiedDate(LocalDateTime.now());
+        billingRepo.saveAndFlush(billing);
         return ResponseEntity.ok("Order created successfully");
     }
 
@@ -62,13 +62,13 @@ public class BillingController {
 
     @PatchMapping("/set-status/{id}")
     public ResponseEntity<String> setStatusById(@PathVariable Long id) {
-        Billing orderToSet = billingRepo.findById(id).orElseThrow(() -> new RuntimeException("Ingredient not found"));
-        if (orderToSet.getStatus().equals(StatusEnum.ACTIVE)) {
-            orderToSet.setStatus(StatusEnum.DELETED);
-        } else orderToSet.setStatus(StatusEnum.ACTIVE);
-        billingRepo.updateStatusById(orderToSet.getStatus(), id);
+        Billing billingToSet = billingRepo.findById(id).orElseThrow(() -> new RuntimeException("Billing not found"));
+        if (billingToSet.getStatus().equals(StatusEnum.ACTIVE)) {
+            billingToSet.setStatus(StatusEnum.DELETED);
+        } else billingToSet.setStatus(StatusEnum.ACTIVE);
+        billingRepo.updateStatusById(billingToSet.getStatus(), id);
 
-        return ResponseEntity.ok("Ingredient with id " + id + "status changed to " + orderToSet.getStatus());
+        return ResponseEntity.ok("Billing with id " + id + "status changed to " + billingToSet.getStatus());
     }
 
 }

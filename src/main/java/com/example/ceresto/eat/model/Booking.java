@@ -63,11 +63,11 @@ public class Booking extends AuditableEntity{
         this.diningTable = diningTable;
     }
     
-    public List<Billing> getChecks() {
+    public List<Billing> getBillings() {
         return billings;
     }
     
-    public void setChecks(List<Billing> billings) {
+    public void setBillings(List<Billing> billings) {
         this.billings = billings;
     }
 }
