@@ -19,7 +19,12 @@ public class DiningTableController {
     private DiningTableRepository diningTableRepository;
     @Autowired
     private DiningTableService diningTableService;
-
+    
+    public DiningTableController(DiningTableRepository diningTableRepository, DiningTableService diningTableService) {
+        this.diningTableRepository = diningTableRepository;
+        this.diningTableService = diningTableService;
+    }
+    
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody DiningTable table, @RequestParam String username) {
         table.setCreatedBy(username);

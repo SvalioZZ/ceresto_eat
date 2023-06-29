@@ -16,12 +16,10 @@ public class BillingDetail extends AuditableEntity{
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @JsonBackReference
     @ManyToOne
     @JoinColumn (name = "billing_id")
     private Billing billing;
     
-    @JsonBackReference
     @ManyToOne
     @JoinColumn (name = "course_id")
     private Course course;

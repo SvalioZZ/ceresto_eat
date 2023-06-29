@@ -16,12 +16,10 @@ public class Booking extends AuditableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @JsonBackReference
+    
     @ManyToOne
     private Customer customer;
-
-    @JsonBackReference
+    
     @ManyToOne
     private DiningTable diningTable;
     

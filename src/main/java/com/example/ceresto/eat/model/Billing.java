@@ -17,9 +17,9 @@ public class Billing extends AuditableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private LocalDateTime date;
+    private LocalDateTime date = LocalDateTime.now();
     
-    @JsonBackReference
+   
     @ManyToOne
     private Booking booking;
     
@@ -28,9 +28,9 @@ public class Billing extends AuditableEntity {
     private List<BillingDetail> billingDetails;
 
 
-    public Billing(Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
+    public Billing(Long id) {
         this.id = id;
-        this.date = date;
+        setDate(LocalDateTime.now());
         this.billingDetails = new ArrayList<>();
     }
     

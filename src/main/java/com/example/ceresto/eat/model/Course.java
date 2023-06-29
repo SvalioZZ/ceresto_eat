@@ -1,10 +1,8 @@
 package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.CourseTypeEnum;
-import com.example.ceresto.eat.enumerati.StatusEnum;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +28,8 @@ public class Course extends AuditableEntity {
     private CourseTypeEnum type;
     
     
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<BillingDetail> billingDetails;
+//    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<BillingDetail> billingDetails;
     
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type) {
@@ -40,7 +38,7 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
-        this.billingDetails = new ArrayList<>();
+//        this.billingDetails = new ArrayList<>();
     }
 
     public Course() {
@@ -86,14 +84,14 @@ public class Course extends AuditableEntity {
         this.type = type;
     }
     
-    public List<BillingDetail> getBillingDetails() {
-        return billingDetails;
-    }
-    
-    public void setBillingDetails(List<BillingDetail> billingDetails) {
-        this.billingDetails = billingDetails;
-    }
-    
+//    public List<BillingDetail> getBillingDetails() {
+//        return billingDetails;
+//    }
+//
+//    public void setBillingDetails(List<BillingDetail> billingDetails) {
+//        this.billingDetails = billingDetails;
+//    }
+//
     //    public String getInfo() {
 //       return id + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
 //    }

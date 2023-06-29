@@ -13,12 +13,10 @@ public class CourseDetail extends AuditableEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
-
-    @JsonBackReference
+    
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;

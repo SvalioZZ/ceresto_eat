@@ -22,7 +22,12 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
-
+    
+    public CourseController(CourseRepository courseRepository, CourseService courseService) {
+        this.courseRepository = courseRepository;
+        this.courseService = courseService;
+    }
+    
     @PostMapping("/create")
     public ResponseEntity<String> createCourse(@RequestBody Course course, @RequestParam String username) {
         course.setCreatedBy(username);
