@@ -11,8 +11,8 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "comanda")
-public class Comanda extends AuditableEntity {
+@Table(name = "billing")
+public class Billing extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,18 +24,18 @@ public class Comanda extends AuditableEntity {
     private Booking booking;
     
     
-    @OneToMany(mappedBy = "comanda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<DettaglioComanda> dettagliComanda;
+    @OneToMany(mappedBy = "billing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<BillingDetail> billingDetails;
 
 
-    public Comanda(StatusEnum status, Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
+    public Billing(StatusEnum status, Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.date = date;
-        this.dettagliComanda = new ArrayList<>();
+        this.billingDetails = new ArrayList<>();
     }
     
-    public Comanda() {
+    public Billing() {
     }
     
     public Long getId() {
@@ -62,11 +62,11 @@ public class Comanda extends AuditableEntity {
         this.booking = booking;
     }
     
-    public List<DettaglioComanda> getDettagliComanda() {
-        return dettagliComanda;
+    public List<BillingDetail> getCheckDetails() {
+        return billingDetails;
     }
     
-    public void setDettagliComanda(List<DettaglioComanda> dettagliComanda) {
-        this.dettagliComanda = dettagliComanda;
+    public void setCheckDetails(List<BillingDetail> billingDetails) {
+        this.billingDetails = billingDetails;
     }
 }

@@ -29,7 +29,7 @@ public class Ingredient extends AuditableEntity{
     private IngredientTypeEnum type;
 
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<DettaglioPortata> dettagliPortata;
+    private List<CourseDetail> courseDetails;
 
     public Ingredient(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
                       Long id, String name, String description, Double price, IngredientTypeEnum type) {
@@ -39,7 +39,7 @@ public class Ingredient extends AuditableEntity{
         this.description = description;
         this.price = price;
         this.type = type;
-        this.dettagliPortata = new ArrayList<>();
+        this.courseDetails = new ArrayList<>();
     }
 
     public Ingredient() {
@@ -86,11 +86,11 @@ public class Ingredient extends AuditableEntity{
         this.type = type;
     }
     
-    public List<DettaglioPortata> getDettagliPortata() {
-        return dettagliPortata;
+    public List<CourseDetail> getCourseDetails() {
+        return courseDetails;
     }
     
-    public void setDettagliPortata(List<DettaglioPortata> dettagliPortata) {
-        this.dettagliPortata = dettagliPortata;
+    public void setCourseDetails(List<CourseDetail> courseDetails) {
+        this.courseDetails = courseDetails;
     }
 }

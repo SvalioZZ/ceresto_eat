@@ -1,7 +1,7 @@
 package com.example.ceresto.eat.service;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.example.ceresto.eat.model.DettaglioPortata;
+import com.example.ceresto.eat.model.CourseDetail;
 import com.example.ceresto.eat.repository.CourseDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class CourseDetailsService {
         this.courseDetailsRepository = courseDetailsRepository;
     }
 
-    public Optional<List<DettaglioPortata>> getByStatus(StatusEnum status){
+    public Optional<List<CourseDetail>> getByStatus(StatusEnum status){
         return courseDetailsRepository.getByStatus(status);
     }
 }
