@@ -34,9 +34,7 @@ public class Course extends AuditableEntity {
     private List<BillingDetail> billingDetails;
     
 
-    public Course(Long id, String name, Double price, String description, CourseTypeEnum type,
-                  StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+    public Course(Long id, String name, Double price, String description, CourseTypeEnum type) {
         this.id = id;
         this.name = name;
         this.price = price;

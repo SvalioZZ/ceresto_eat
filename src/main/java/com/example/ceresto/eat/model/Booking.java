@@ -28,8 +28,7 @@ public class Booking extends AuditableEntity{
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Billing> billings;
     
-    public Booking(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Customer customer, DiningTable diningTable) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+    public Booking(Long id, Customer customer, DiningTable diningTable) {
         this.id = id;
         this.customer = customer;
         this.diningTable = diningTable;

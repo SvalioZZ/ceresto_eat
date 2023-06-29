@@ -28,8 +28,7 @@ public class Billing extends AuditableEntity {
     private List<BillingDetail> billingDetails;
 
 
-    public Billing(StatusEnum status, Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+    public Billing(Long id, LocalDateTime date, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate) {
         this.id = id;
         this.date = date;
         this.billingDetails = new ArrayList<>();

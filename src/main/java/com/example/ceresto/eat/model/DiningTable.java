@@ -27,8 +27,7 @@ public class DiningTable extends AuditableEntity {
     @OneToMany(mappedBy = "diningTable", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Booking> bookings;
     
-    public DiningTable(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id, Boolean reserved, Integer seats) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+    public DiningTable(Long id, Boolean reserved, Integer seats) {
         this.id = id;
         this.reserved = reserved;
         this.seats = seats;

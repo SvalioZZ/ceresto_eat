@@ -45,10 +45,8 @@ public class Customer extends AuditableEntity {
     private List<Booking> bookings;
 
     
-    public Customer(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
-                    Long id, String name, String surname, Integer age, String password, String address, String email,
+    public Customer(Long id, String name, String surname, Integer age, String password, String address, String email,
                     String diet, String phoneNumber, Long creditCardNumber) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
         this.id = id;
         this.name = name;
         this.surname = surname;

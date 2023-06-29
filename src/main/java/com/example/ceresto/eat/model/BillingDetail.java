@@ -27,8 +27,7 @@ public class BillingDetail extends AuditableEntity{
     private Course course;
     
 
-    public BillingDetail(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate, Long id) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+    public BillingDetail(Long id) {
         this.id = id;
     }
 

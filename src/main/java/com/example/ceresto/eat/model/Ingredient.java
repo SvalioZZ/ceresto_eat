@@ -31,9 +31,7 @@ public class Ingredient extends AuditableEntity{
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CourseDetail> courseDetails;
 
-    public Ingredient(StatusEnum status, String createdBy, LocalDateTime createdDate, String lastModifiedBy, LocalDateTime lastModifiedDate,
-                      Long id, String name, String description, Double price, IngredientTypeEnum type) {
-        super(status, createdBy, createdDate, lastModifiedBy, lastModifiedDate);
+    public Ingredient(Long id, String name, String description, Double price, IngredientTypeEnum type) {
         this.id = id;
         this.name = name;
         this.description = description;
