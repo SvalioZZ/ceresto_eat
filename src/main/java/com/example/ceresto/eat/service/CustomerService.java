@@ -6,6 +6,7 @@ import com.example.ceresto.eat.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,7 @@ public class CustomerService {
        return Optional.of(customerRepository.getReferenceById(id));
    }
 
-    public Optional<Customer> getByStatus(StatusEnum status) {
+    public Optional<List<Customer>> getByStatus(StatusEnum status) {
         return customerRepository.findByStatus(status);
     }
 }

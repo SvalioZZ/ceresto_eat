@@ -2,6 +2,8 @@ package com.example.ceresto.eat.controller;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Booking;
+import com.example.ceresto.eat.model.Customer;
+import com.example.ceresto.eat.model.DiningTable;
 import com.example.ceresto.eat.repository.BookingRepository;
 import com.example.ceresto.eat.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,26 @@ public class BookingController {
     private BookingService bookingService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createBooking (@RequestBody Booking booking, @RequestParam String username) {
-        booking.setCreatedBy(username);
-        booking.setCreatedDate(LocalDateTime.now());
-        booking.setLastModifiedBy(username);
-        booking.setLastModifiedDate(LocalDateTime.now());
-        bookingRepository.saveAndFlush(booking);
-        return ResponseEntity.ok("Booking created successfully");
+    public ResponseEntity<String> reserveTable(@RequestBody Booking booking, @RequestParam String username,
+                                               @RequestParam Customer customer, @RequestParam DiningTable diningTable){
+
+        // in postman si lascia il json vuoto e si imposta la prenotazione tramite i requestParam nell'url
+        // se il tavolo è già prenotato (cioè reserved=true), da errore e si ferma
+        if (diningTable.getReserved().equals(true)){
+            throw new RuntimeException("Table already reserved");
+        } else {
+            booking.setCreatedBy(username);
+            booking.setCreatedDate(LocalDateTime.now());
+            booking.setLastModifiedBy(username);
+            booking.setLastModifiedDate(LocalDateTime.now());
+            booking.setCustomer(customer);
+            booking.setDiningTable(diningTable);
+            // il tavolo si cambia direttamente da reserved false a reserved true
+            diningTable.setReserved(true);
+            bookingRepository.saveAndFlush(booking);
+        }
+        return ResponseEntity.ok("Table with id " + diningTable.getId() + " reserved for customer with id " + customer.getId());
+
     }
 
     @GetMapping("/get-all")
@@ -59,6 +74,8 @@ public class BookingController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id) {
+        //cancellando la prenotazione del tavolo da reserved=true diventa reserved=false e quindi è riprenotabile
+        bookingRepository.getReferenceById(id).getDiningTable().setReserved(false);
         bookingRepository.deleteById(id);
     }
 

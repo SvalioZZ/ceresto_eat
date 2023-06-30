@@ -1,7 +1,9 @@
 package com.example.ceresto.eat.controller;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
+import com.example.ceresto.eat.model.Booking;
 import com.example.ceresto.eat.model.Customer;
+import com.example.ceresto.eat.model.DiningTable;
 import com.example.ceresto.eat.repository.CustomerRepository;
 import com.example.ceresto.eat.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class CustomerController {
     }
 
     @GetMapping ("/get-active-records")
-    public Optional<Customer> getActiveRecords(){
+    public Optional<List<Customer>> getActiveRecords(){
         return customerService.getByStatus(StatusEnum.ACTIVE);
     }
 
