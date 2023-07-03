@@ -32,7 +32,7 @@ public class BillingController {
     }
 
     @GetMapping("/get-all")
-    public List<Billing> getAll() {
+    public List<Billing> getAllBillings() {
         return billingRepo.findAll();
     }
 

@@ -36,7 +36,7 @@ public class DiningTableController {
     }
 
     @GetMapping("/get-all")
-    public List<DiningTable> getAll() {
+    public List<DiningTable> getAllDiningTables() {
         return diningTableRepository.findAll();
     }
 

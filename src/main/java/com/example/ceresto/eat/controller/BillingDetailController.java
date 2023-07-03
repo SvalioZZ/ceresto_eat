@@ -33,7 +33,7 @@ public class BillingDetailController {
     }
 
     @GetMapping("/get-all")
-    public List<BillingDetail> getAll() {
+    public List<BillingDetail> getAllBillingDetails() {
         return billingDetailRepo.findAll();
     }
 

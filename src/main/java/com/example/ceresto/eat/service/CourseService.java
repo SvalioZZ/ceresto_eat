@@ -14,11 +14,11 @@ import java.util.Optional;
 public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
-
+    
     public CourseService(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
-
+    
     public Optional<List<Course>> getByStatus(StatusEnum status) {
         return courseRepository.findByStatus(status);
     }

@@ -1,10 +1,6 @@
 package com.example.ceresto.eat.model;
 
-import com.example.ceresto.eat.enumerati.StatusEnum;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "course_detail")
@@ -37,14 +33,14 @@ public class CourseDetail extends AuditableEntity{
         this.id = id;
     }
 
-    public Ingredient getIngredient() {
+    public Ingredient getIngredients() {
         return ingredient;
     }
 
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
-
+    
     public Course getCourse() {
         return course;
     }

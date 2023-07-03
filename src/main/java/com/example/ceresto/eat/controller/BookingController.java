@@ -5,8 +5,11 @@ import com.example.ceresto.eat.model.Booking;
 import com.example.ceresto.eat.model.Customer;
 import com.example.ceresto.eat.model.DiningTable;
 import com.example.ceresto.eat.repository.BookingRepository;
+import com.example.ceresto.eat.repository.DiningTableRepository;
 import com.example.ceresto.eat.service.BookingService;
+import com.example.ceresto.eat.service.DiningTableService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +25,11 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
+    
+    @Autowired
+    private DiningTableRepository diningTableRepository;
+    @Autowired
+    private DiningTableService diningTableService;
 
     @PostMapping("/create")
     public ResponseEntity<String> reserveTable(@RequestBody Booking booking, @RequestParam String username,
@@ -47,7 +55,7 @@ public class BookingController {
     }
 
     @GetMapping("/get-all")
-    public List<Booking> getAllBooking() {
+    public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
     
@@ -85,6 +93,9 @@ public class BookingController {
     @DeleteMapping("/delete-all")
     public void deleteAll() {
         bookingRepository.deleteAll();
+        for (DiningTable table : diningTableRepository.findAll()) {
+            table.setReserved(false);
+        }
     }
 
     @PatchMapping("/update-status/{id}")

@@ -32,7 +32,7 @@ public class IngredientController {
     }
 
     @GetMapping("/get-all")
-    public List<Ingredient> getAll() {
+    public List<Ingredient> getAllIngredients() {
         return ingredientRepository.findAll();
     }
 

@@ -1,9 +1,14 @@
 package com.example.ceresto.eat.controller;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
+import com.example.ceresto.eat.model.Course;
 import com.example.ceresto.eat.model.CourseDetail;
+import com.example.ceresto.eat.model.Ingredient;
 import com.example.ceresto.eat.repository.CourseDetailsRepository;
+import com.example.ceresto.eat.repository.CourseRepository;
+import com.example.ceresto.eat.repository.IngredientRepository;
 import com.example.ceresto.eat.service.CourseDetailsService;
+import com.example.ceresto.eat.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +26,15 @@ public class CourseDetailsController {
 
     @Autowired
     private CourseDetailsService courseDetailsService;
+    
+    @Autowired
+    private CourseRepository courseRepository;
+    
+    @Autowired
+    private CourseService courseService;
+    
+    @Autowired
+    private IngredientRepository ingredientRepository;
 
     @PostMapping("/create")
     public ResponseEntity<String> createCourseDetail (@RequestBody CourseDetail courseDetail, @RequestParam String username) {
@@ -58,7 +72,6 @@ public class CourseDetailsController {
         courseDetailsRepository.deleteById(id);
         return ResponseEntity.ok("Course Detail with id " + id + " updated successfully");
     }
-
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id) {
         courseDetailsRepository.deleteById(id);

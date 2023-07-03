@@ -3,9 +3,6 @@ package com.example.ceresto.eat.model;
 import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "course")
 public class Course extends AuditableEntity {
@@ -78,7 +75,7 @@ public class Course extends AuditableEntity {
         this.type = type;
     }
     
-//    public List<BillingDetail> getBillingDetails() {
+    //    public List<BillingDetail> getBillingDetails() {
 //        return billingDetails;
 //    }
 //

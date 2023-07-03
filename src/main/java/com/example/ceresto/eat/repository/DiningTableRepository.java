@@ -25,4 +25,6 @@ public interface DiningTableRepository extends JpaRepository<DiningTable, Long> 
     List<Course> getFromName (@Param("name") String name);
 
     Optional<List<DiningTable>> findByStatus(StatusEnum status);
+    
+   
 }

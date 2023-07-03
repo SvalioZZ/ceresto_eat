@@ -23,5 +23,4 @@ public class DiningTableService {
         return diningTableRepository.findByStatus(status);
     }
 
-
 }
