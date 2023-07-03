@@ -48,12 +48,14 @@ public class CourseDetailsController {
         return courseDetailsService.getByStatus(StatusEnum.ACTIVE);
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody CourseDetail courseDetail, @RequestParam String username) {
-        courseDetailsRepository.deleteById(id);
+        courseDetail.setCreatedBy(courseDetailsRepository.getReferenceById(id).getCreatedBy());
+        courseDetail.setCreatedDate(courseDetailsRepository.getReferenceById(id).getCreatedDate());
         courseDetail.setLastModifiedBy(username);
         courseDetail.setLastModifiedDate(LocalDateTime.now());
         courseDetailsRepository.save(courseDetail);
+        courseDetailsRepository.deleteById(id);
         return ResponseEntity.ok("Course Detail with id " + id + " updated successfully");
     }
 

@@ -26,11 +26,6 @@ public class Course extends AuditableEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
-    
-    
-//    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<BillingDetail> billingDetails;
-    
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type) {
         this.id = id;
@@ -38,7 +33,6 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
-//        this.billingDetails = new ArrayList<>();
     }
 
     public Course() {
