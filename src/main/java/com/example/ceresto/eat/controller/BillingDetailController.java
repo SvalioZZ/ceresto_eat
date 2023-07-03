@@ -47,12 +47,15 @@ public class BillingDetailController {
         return billingDetailService.getByStatus(StatusEnum.ACTIVE);
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody BillingDetail billingDetail, @RequestParam String username) {
-        billingDetailRepo.deleteById(id);
+        billingDetail.setCreatedBy(billingDetailRepo.getReferenceById(id).getCreatedBy());
+        billingDetail.setCreatedDate(billingDetailRepo.getReferenceById(id).getCreatedDate());
+        billingDetail.setId(billingDetailRepo.getReferenceById(id).getId());
         billingDetail.setLastModifiedBy(username);
         billingDetail.setLastModifiedDate(LocalDateTime.now());
         billingDetailRepo.save(billingDetail);
+        billingDetailRepo.deleteById(id);
         return ResponseEntity.ok("Billing Detail with id " + id + " updated successfully");
     }
 

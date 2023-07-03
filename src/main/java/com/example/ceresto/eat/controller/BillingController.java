@@ -41,12 +41,15 @@ public class BillingController {
         return billingRepo.findById(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Billing billing, @RequestParam String username){
-        billingRepo.deleteById(id);
+        billing.setCreatedBy(billingRepo.getReferenceById(id).getCreatedBy());
+        billing.setCreatedDate(billingRepo.getReferenceById(id).getCreatedDate());
+        billing.setId(billingRepo.getReferenceById(id).getId());
         billing.setLastModifiedBy(username);
         billing.setLastModifiedDate(LocalDateTime.now());
         billingRepo.save(billing);
+        billingRepo.deleteById(id);
         return ResponseEntity.ok("Billing with id " + id + " updated successfully");
     }
 

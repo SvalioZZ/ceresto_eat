@@ -63,12 +63,15 @@ public class BookingController {
         return bookingService.getByStatus(StatusEnum.ACTIVE);
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Booking booking, @RequestParam String username) {
-        bookingRepository.deleteById(id);
+        booking.setCreatedBy(bookingRepository.getReferenceById(id).getCreatedBy());
+        booking.setCreatedDate(bookingRepository.getReferenceById(id).getCreatedDate());
+        booking.setId(bookingRepository.getReferenceById(id).getId());
         booking.setLastModifiedBy(username);
         booking.setLastModifiedDate(LocalDateTime.now());
         bookingRepository.save(booking);
+        bookingRepository.deleteById(id);
         return ResponseEntity.ok("Booking with id " + id + " updated successfully");
     }
 
