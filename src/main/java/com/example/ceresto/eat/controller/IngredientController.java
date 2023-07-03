@@ -53,10 +53,12 @@ public class IngredientController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Ingredient ingredient, @RequestParam String username){
-        ingredientRepository.deleteById(id);
+        ingredient.setCreatedBy(ingredientRepository.getReferenceById(id).getCreatedBy());
+        ingredient.setCreatedDate(ingredientRepository.getReferenceById(id).getCreatedDate());
         ingredient.setLastModifiedBy(username);
         ingredient.setLastModifiedDate(LocalDateTime.now());
-        ingredientRepository.save(ingredient);
+        ingredientRepository.saveAndFlush(ingredient);
+        ingredientRepository.deleteById(id);
         return ResponseEntity.ok("Ingredient with id " + id + " updated successfully");
     }
 

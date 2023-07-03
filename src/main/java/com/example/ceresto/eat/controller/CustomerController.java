@@ -48,12 +48,14 @@ public class CustomerController {
         return customerService.getByStatus(StatusEnum.ACTIVE);
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Customer customer, @RequestParam String username){
-        customerRepository.deleteById(id);
+        customer.setCreatedBy(customerRepository.getReferenceById(id).getCreatedBy());
+        customer.setCreatedDate(customerRepository.getReferenceById(id).getCreatedDate());
         customer.setLastModifiedBy(username);
         customer.setLastModifiedDate(LocalDateTime.now());
-        customerRepository.save(customer);
+        customerRepository.saveAndFlush(customer);
+        customerRepository.deleteById(id);
         return ResponseEntity.ok("Customer with id "+ id + " updated successfully");
     }
 
