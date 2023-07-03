@@ -50,12 +50,15 @@ public class DiningTableController {
         return diningTableService.getByStatus(StatusEnum.ACTIVE);
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody DiningTable table, @RequestParam String username){
-        diningTableRepository.deleteById(id);
+        table.setCreatedBy(diningTableRepository.getReferenceById(id).getCreatedBy());
+        table.setCreatedDate(diningTableRepository.getReferenceById(id).getCreatedDate());
+        table.setId(diningTableRepository.getReferenceById(id).getId());
         table.setLastModifiedBy(username);
         table.setLastModifiedDate(LocalDateTime.now());
         diningTableRepository.save(table);
+        diningTableRepository.deleteById(id);
         return ResponseEntity.ok("Table with id " + id + " updated successfully");
     }
 
