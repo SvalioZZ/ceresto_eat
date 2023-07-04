@@ -16,10 +16,12 @@ public class CourseDetail extends AuditableEntity{
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
-    
 
-    public CourseDetail(Long id) {
+
+    public CourseDetail(Long id, Ingredient ingredient, Course course) {
         this.id = id;
+        this.ingredient = ingredient;
+        this.course = course;
     }
 
     public CourseDetail() {
