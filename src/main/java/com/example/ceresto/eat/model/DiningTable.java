@@ -30,7 +30,6 @@ public class DiningTable extends AuditableEntity {
         this.tableNumber = tableNumber;
         this.reserved = reserved;
         this.seats = seats;
-        this.bookings = new ArrayList<>();
     }
     
     public DiningTable() {

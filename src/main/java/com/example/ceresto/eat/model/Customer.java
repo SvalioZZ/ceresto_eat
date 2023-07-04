@@ -57,7 +57,6 @@ public class Customer extends AuditableEntity {
         this.diet = diet;
         this.phoneNumber = phoneNumber;
         this.creditCardNumber = creditCardNumber;
-        this.bookings = new ArrayList<>();
     }
     
     public Customer() {

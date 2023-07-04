@@ -3,6 +3,9 @@ package com.example.ceresto.eat.model;
 import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "course")
 public class Course extends AuditableEntity {
@@ -23,6 +26,9 @@ public class Course extends AuditableEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CourseTypeEnum type;
+    
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Ingredient> ingredients;
 
     public Course(Long id, String name, Double price, String description, CourseTypeEnum type) {
         this.id = id;
@@ -30,6 +36,7 @@ public class Course extends AuditableEntity {
         this.price = price;
         this.description = description;
         this.type = type;
+        this.ingredients = new ArrayList<>();
     }
 
     public Course() {
@@ -75,14 +82,23 @@ public class Course extends AuditableEntity {
         this.type = type;
     }
     
-    //    public List<BillingDetail> getBillingDetails() {
-//        return billingDetails;
-//    }
-//
-//    public void setBillingDetails(List<BillingDetail> billingDetails) {
-//        this.billingDetails = billingDetails;
-//    }
-//
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+    
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+    
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(ingredient);
+    }
+    
+    public void removeIngredient(Ingredient ingredient) {
+        ingredients.remove(ingredient);
+    }
+    
+    
     //    public String getInfo() {
 //       return id + "\nDescription: " + description + "\nPrice: " + price + "\nIngredients: " + ingredients;
 //    }

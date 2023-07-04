@@ -2,6 +2,7 @@ package com.example.ceresto.eat.model;
 
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.enumerati.IngredientTypeEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,8 +29,9 @@ public class Ingredient extends AuditableEntity{
     @Enumerated(EnumType.STRING)
     private IngredientTypeEnum type;
 
-    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CourseDetail> courseDetails;
+    @JsonBackReference
+    @ManyToOne
+    private Course course;
 
     public Ingredient(Long id, String name, String description, Double price, IngredientTypeEnum type) {
         this.id = id;
@@ -37,7 +39,6 @@ public class Ingredient extends AuditableEntity{
         this.description = description;
         this.price = price;
         this.type = type;
-        this.courseDetails = new ArrayList<>();
     }
 
     public Ingredient() {
@@ -84,11 +85,10 @@ public class Ingredient extends AuditableEntity{
         this.type = type;
     }
     
-    public List<CourseDetail> getCourseDetails() {
-        return courseDetails;
+    public void setCourse(Course course) {
+        this.course = course;
     }
-    
-    public void setCourseDetails(List<CourseDetail> courseDetails) {
-        this.courseDetails = courseDetails;
+    public Course getCourse() {
+        return course;
     }
 }
