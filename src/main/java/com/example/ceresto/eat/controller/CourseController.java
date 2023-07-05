@@ -3,7 +3,6 @@ package com.example.ceresto.eat.controller;
 import com.example.ceresto.eat.enumerati.CourseTypeEnum;
 import com.example.ceresto.eat.enumerati.StatusEnum;
 import com.example.ceresto.eat.model.Course;
-import com.example.ceresto.eat.model.Ingredient;
 import com.example.ceresto.eat.repository.CourseRepository;
 import com.example.ceresto.eat.repository.IngredientRepository;
 import com.example.ceresto.eat.service.CourseService;
@@ -109,21 +108,6 @@ public class CourseController {
         courseRepository.updateStatusById(courseToSet.getStatus(), id);
 
         return ResponseEntity.ok("Course with id " + id + "status changed to " + courseToSet.getStatus());
-    }
-
-    //metodo per aggiungere un ingrediente al piatto
-    
-    @PostMapping("/add-to-course/{id}/ingredient/{ingredient_id}")
-    public ResponseEntity<Course> addToCourse(@PathVariable("id") Long id,
-                                         @PathVariable("ingredient_id") Long ingredient_id) {
-        Course course = courseRepository.findById(id).orElse(null);
-        if(course == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        Ingredient ingredient = ingredientRepository.findById(ingredient_id).orElse(null);
-        course.addIngredient(ingredient);
-        courseRepository.save(course);
-        return ResponseEntity.ok().body(course);
     }
 
 
