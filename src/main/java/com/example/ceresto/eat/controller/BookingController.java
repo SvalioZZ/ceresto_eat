@@ -46,6 +46,7 @@ public class BookingController {
             booking.setLastModifiedDate(LocalDateTime.now());
             booking.setCustomer(customer);
             booking.setDiningTable(diningTable);
+            // il tavolo si cambia direttamente da reserved false a reserved true
             diningTable.setReserved(true);
             bookingRepository.saveAndFlush(booking);
         }
@@ -91,11 +92,10 @@ public class BookingController {
 
     @DeleteMapping("/delete-all")
     public void deleteAll() {
+        bookingRepository.deleteAll();
         for (DiningTable table : diningTableRepository.findAll()) {
             table.setReserved(false);
         }
-        bookingRepository.deleteAll();
-        // ora di toglie il reserved quando si cancellano tutte le prenotazioni
     }
 
     @PatchMapping("/update-status/{id}")
